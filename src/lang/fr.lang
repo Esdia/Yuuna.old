@@ -40,7 +40,7 @@
   "game.no_winner": "Il n'y a pas de vainqueur.",
   "game.winner": "Le gagnant est : {}.",
   "game.winners": "Les gagnants sont : {}.",
-  "game.player.turn": "Tour de {}.",
+  "game.player.turn": "Tour de {}",
 
   "game.hand.cards": "Cartes",
   "game.hand.score": "Score",

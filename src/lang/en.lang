@@ -40,7 +40,7 @@
   "game.no_winner": "There is no winner.",
   "game.winner": "The winner is {}.",
   "game.winners": "The winners are {}.",
-  "game.player.turn": "Turn of {}.",
+  "game.player.turn": "Turn of {}",
 
   "game.hand.cards": "Cards",
   "game.hand.score": "Score",

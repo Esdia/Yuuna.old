@@ -195,7 +195,7 @@
   "help.page.5.field_name_1": "The newcomer's auto-role",
   "help.page.5.field_value_1": "You can set one role to be automatically given to anyone joining your server buy using `{}autorole set @role`.\nYou can see which role is the autorole by using `{}autorole`.\nYou can remove the autorole (and disabling this feature) buy using `{}autorole delete`.",
   "help.page.5.field_name_2": "The level rewards",
-  "help.page.5.field_value_2": "You can set roles to be automatically given to members when they reach a certain xp level.\nTo do that, use `{}reward set [level] @role` to set a role reward to the specified level.\nYou can use `{}reward delete @role` to delete the specified role from the rewards.\nUse `{}reward list` to get a list of the configured role rewards",
+  "help.page.5.field_value_2": "You can set roles to be automatically given to members when they reach a certain xp level.\nTo do that, use `{}reward set [level] @role` to set a role reward to the specified level.\nYou can use `{}reward delete [level]` to delete the reward for the specified level.\nUse `{}reward list` to get a list of the configured role rewards",
 
   "help.page.6.title": "Help - Yuuna : The games",
   "help.page.6.description": "You can play some games using Yuuna :D\nFor each game, you can use `{}help [game_name]` to see the rules.",

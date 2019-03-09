@@ -469,6 +469,7 @@ async def rewards_interpret(infos):
                         pass
                 else:
                     await del_reward(infos, n)
+                    return
             else:
                 pass
         await infos.client.send_message(

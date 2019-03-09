@@ -2,7 +2,12 @@
 src/discord.log
 
 # PyCache
-#ToDo
+src/modules/__pycache__/*
+src/modules/game/__pycache__/*
+src/modules/game/blackjack/__pycache__/*
+src/modules/game/chess/__pycache__/*
+src/modules/game/connect4/__pycache__/*
+src/utils/__pycache__/*
 
 # .idea of the project
 .\idea/*

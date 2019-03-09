@@ -3,6 +3,7 @@ import logging
 
 import os
 import sys
+from asyncio import sleep
 
 import src.utils.information as information
 from src.utils.storage import Database
@@ -25,17 +26,26 @@ def get_redis_url():
     return redis_url
 
 
+# Every 150 seconds, the redis connection closes, so every 120 seconds, I close it and reconnect it
+async def refresh_redis():
+    global database
+    while True:
+        redis_url = get_redis_url()
+        if redis_url is not None:
+            database = Database(redis_url)
+        else:
+            print('ERROR : No database URL provided')
+            sys.exit(2)
+        await sleep(120)
+
+
 @client.event
 async def on_ready():
-    global database
-    redis_url = get_redis_url()
-    if redis_url is not None:
-        database = Database(redis_url)
-    else:
-        print('ERROR : No database URL provided')
-        sys.exit(2)
-
     await client.change_presence(game=discord.Game(name="y!help"))
+
+    client.loop.create_task(
+        refresh_redis()
+    )
 
     print('Discord API version :', discord.__version__)
     print('Logged in as')

@@ -274,7 +274,7 @@ async def create(infos):
         embed_players = Embed(title="Black Jack",
                               description="",
                               color=0xD828D0)
-        embed_players.add_field(name=infos.text_data["game.blackjack.creator"],
+        embed_players.add_field(name=infos.text_data["game.creator"],
                                 value=players[0].user.mention,
                                 inline=False)
         embed_players.set_footer(text=infos.text_data["game.blackjack.entry.footer"])

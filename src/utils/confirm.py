@@ -26,10 +26,9 @@ async def confirm(infos):
             infos.text_data["utils.confirm.inactivity"]
         )
         return False
-    elif res.reaction.emoji == "✅":
+    else:
         await infos.client.delete_message(
             message
         )
-        return True
-    else:
-        return False
+        return res.reaction.emoji == "✅"
+

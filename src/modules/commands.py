@@ -28,17 +28,6 @@ async def ping(infos):
     )
 
 
-async def test(infos):
-    for c in infos.message.server.channels:
-        print(
-            "{}, {} : {}".format(
-                c.name,
-                c.type,
-                type(c.type)
-            )
-        )
-
-
 async def interpret(infos):
     command_list = {
         "ping": ping,
@@ -63,8 +52,7 @@ async def interpret(infos):
         "mute": moderation.mute,
         "unmute": moderation.unmute,
         "kick": moderation.kick,
-        "ban": moderation.ban,
-        "test": test
+        "ban": moderation.ban
     }
 
     msg = infos.message.content.split()

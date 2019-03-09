@@ -35,6 +35,8 @@ async def on_ready():
         print('ERROR : No database URL provided')
         sys.exit(2)
 
+    await client.change_presence(game=discord.Game(name="y!help"))
+
     print('Discord API version :', discord.__version__)
     print('Logged in as')
     print(client.user.name)

@@ -20,18 +20,26 @@ class Infos:
         prefix = "y!" if prefix is None else str(prefix)
         return prefix
 
-    async def get_language(self):
+    async def get_language(self, is_heroku):
         lang = await self.storage.get("language")
 
         lang = "en" if lang is None else str(lang)
 
-        data = open("lang/{}.lang".format(lang)).read()
+        path = "lang/{}.lang"
+        if is_heroku:
+            path = "src/{}".format(
+                path
+            )
+
+        data = open(
+            path.format(lang)
+        ).read()
         language_data = json.loads(data)
 
         return language_data
 
 
-async def init(client, message, database):
+async def init(client, message, database, is_heroku):
     infos = Infos(
         client,
         message,
@@ -39,6 +47,6 @@ async def init(client, message, database):
     )
     infos.storage = await infos.get_storage()
     infos.prefix = await infos.get_prefix()
-    infos.text_data = await infos.get_language()
+    infos.text_data = await infos.get_language(is_heroku)
 
     return infos

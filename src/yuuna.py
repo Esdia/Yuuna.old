@@ -56,7 +56,8 @@ async def on_message(message):
         infos = await information.init(
             client,
             message,
-            database
+            database,
+            is_heroku
         )
         # if True, then the message was a command
         command = await interpret(infos)

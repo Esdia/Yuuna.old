@@ -168,6 +168,25 @@ async def on_member_remove(member):
         member.server.owner.id
     )
     logger.info(log)
+    storage = database.get_storage(member.server)
+    await storage.delete(
+        "user:{}:bank".format(
+            member.id
+        )
+    )
+    await storage.srem(
+        "users:bank",
+        member.id
+    )
+    await storage.delete(
+        "user:{}:xp".format(
+            member.id
+        )
+    )
+    await storage.srem(
+        "users:xp",
+        member.id
+    )
 
 
 if __name__ == "__main__":

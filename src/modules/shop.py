@@ -205,19 +205,18 @@ async def display_shop(infos):
             )
             i += 1
         else:
-            if role is None:
-                await infos.storage.srem(
-                    "shop:roles",
+            await infos.storage.srem(
+                "shop:roles",
+                roles_id[i]
+            )
+            await infos.storage.delete(
+                "shop:{}:price".format(
                     roles_id[i]
                 )
-                await infos.storage.delete(
-                    "shop:{}:price".format(
-                        roles_id[i]
-                    )
-                )
-                roles_id.remove(
-                    roles_id[i]
-                )
+            )
+            roles_id.remove(
+                roles_id[i]
+            )
 
         if i % 10 == 0:  # Proc once every ten members
             embed = Embed(

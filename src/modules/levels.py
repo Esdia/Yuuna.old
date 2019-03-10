@@ -104,19 +104,20 @@ async def rank_command(infos, members=None):
                     member_info["needed_xp"],
                     member_info["total_xp"]
                 ),
-                inline=False
+                inline=True
             )
             embed.add_field(
                 name=infos.text_data["levels.level"],
                 value=str(member_info["level"]),
-                inline=False
+                inline=True
             )
             embed.add_field(
                 name=infos.text_data["levels.rank"],
                 value="{}/{}".format(
                     member_info["rank"],
                     member_info["total"]
-                )
+                ),
+                inline=True
             )
             await infos.client.send_message(
                 infos.message.channel,

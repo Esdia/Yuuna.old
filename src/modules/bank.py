@@ -176,7 +176,7 @@ async def bank(infos, members=None):
         embed.add_field(
             name=infos.text_data["bank.coins"],
             value="{}".format(coins),
-            inline=False
+            inline=True
         )
         if rank is not None:
             embed.add_field(
@@ -185,7 +185,7 @@ async def bank(infos, members=None):
                     rank[0],
                     rank[1]
                 ),
-                inline=False
+                inline=True
             )
         await infos.client.send_message(
             infos.message.channel,

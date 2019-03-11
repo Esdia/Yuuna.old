@@ -296,7 +296,6 @@ async def create(infos):
                 infos.message.channel,
                 infos.text_data["game.blackjack.inactivity.cancel"]
             )
-            return
         else:
             await start(
                 infos,

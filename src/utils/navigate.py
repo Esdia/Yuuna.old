@@ -59,3 +59,8 @@ async def navigate(client, message, author, list_pages):
             user=author,
             timeout=60
         )
+
+    if message.server.me.server_permissions.manage_messages:
+        await client.clear_reactions(
+            message
+        )

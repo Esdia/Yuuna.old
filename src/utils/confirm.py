@@ -21,6 +21,10 @@ async def confirm(infos):
     )
 
     if res is None:
+        if infos.manage_messages:
+            await infos.client.clear_reactions(
+                message
+            )
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["utils.confirm.inactivity"]

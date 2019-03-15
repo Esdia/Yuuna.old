@@ -128,6 +128,10 @@ async def wait_for_players(infos, message, embed, players):
             timeout=120
         )
         if res is None:
+            if infos.manage_message:
+                await infos.client.clear_reactions(
+                    message
+                )
             return None
         elif not res.user.bot:
             react = res.reaction.emoji
@@ -167,5 +171,10 @@ async def wait_for_players(infos, message, embed, players):
                     )
                 if user == players[0].user:
                     start = True
+
+    if infos.manage_message:
+        await infos.client.clear_reactions(
+            message
+        )
 
     return players

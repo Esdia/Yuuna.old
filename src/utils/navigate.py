@@ -42,11 +42,12 @@ async def navigate(client, message, author, list_pages):
             # If we try to go right from the last page, we end up on the first one
             else:
                 i = 0
-        await client.remove_reaction(
-            message,
-            react,
-            author
-        )
+        if message.server.me.server_permissions.manage_messages:
+            await client.remove_reaction(
+                message,
+                react,
+                author
+            )
         await update_message(
             client,
             message,

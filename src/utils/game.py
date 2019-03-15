@@ -17,7 +17,8 @@ async def wait_for_player(infos, message):
         if res is None or (not res.user.bot and res.user != infos.message.author):
             ok = True
 
-    await infos.client.clear_reactions(message)
+    if infos.manage_messages:
+        await infos.client.clear_reactions(message)
 
     if res is None:
         return None

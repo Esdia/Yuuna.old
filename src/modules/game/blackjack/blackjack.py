@@ -141,7 +141,8 @@ async def send_score(infos, p):
 # Manages a game turn
 async def turn(infos, players, deck, message, embed, n):
     reactions = ["🇭", "🇸"]
-    await infos.client.clear_reactions(message)
+    if infos.manage_messages:
+        await infos.client.clear_reactions(message)
 
     for r in reactions:
         await infos.client.add_reaction(message, r)
@@ -172,11 +173,12 @@ async def turn(infos, players, deck, message, embed, n):
                     if res.reaction.emoji == "🇸":
                         p.in_game = False
                     users.remove(p.user)
-                    await infos.client.remove_reaction(
-                        message,
-                        res.reaction.emoji,
-                        res.user
-                    )
+                    if infos.manage_messages:
+                        await infos.client.remove_reaction(
+                            message,
+                            res.reaction.emoji,
+                            res.user
+                        )
         await update_embed(
             infos,
             players,

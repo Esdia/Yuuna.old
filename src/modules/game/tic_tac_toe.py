@@ -58,7 +58,8 @@ async def end(infos, winner, message, inactivity=None):
             inactivity,
             result
         )
-    await infos.client.clear_reactions(message)
+    if infos.manage_messages:
+        await infos.client.clear_reactions(message)
     await infos.client.edit_message(
         message,
         new_content=result
@@ -121,12 +122,13 @@ async def game(infos, message_cases, message_turn, players, cases, reactions):
                 res.reaction,
                 limit=50
             )
-            for u in users:
-                await infos.client.remove_reaction(
-                    message_turn,
-                    react,
-                    u
-                )
+            if infos.manage_messages:
+                for u in users:
+                    await infos.client.remove_reaction(
+                        message_turn,
+                        react,
+                        u
+                    )
 
 
 async def start(infos):

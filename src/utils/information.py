@@ -6,6 +6,9 @@ class Infos:
         self.client = client
         self.message = message
         self.database = database
+        # Sometimes the bot tries to delete reactions. In order to do that, the bot need the manage_message permission
+        # We will use this variable to see if the bot can do what it si trying to do
+        self.manage_messages = message.server.me.server_permissions.manage_messages
         self.storage = None
         self.prefix = None
         self.text_data = None

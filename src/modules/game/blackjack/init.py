@@ -159,11 +159,12 @@ async def wait_for_players(infos, message, embed, players):
                 ok = True
             # start
             elif react == reactions[0]:
-                await infos.client.remove_reaction(
-                    message,
-                    react,
-                    user
-                )
+                if infos.manage_messages:
+                    await infos.client.remove_reaction(
+                        message,
+                        react,
+                        user
+                    )
                 if user == players[0].user:
                     start = True
 

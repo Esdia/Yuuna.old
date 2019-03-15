@@ -60,7 +60,8 @@ async def end(infos, game_infos, inactivity=False, tie=False):
         inactivity=inactivity,
         tie=tie
     )
-    await infos.client.clear_reactions(game_infos.message)
+    if infos.manage_messages:
+        await infos.client.clear_reactions(game_infos.message)
 
 
 # Given a turn (i.e. a player, a color), and the column in which the player wants to play, this functions execute the play
@@ -128,22 +129,24 @@ async def game(infos, game_infos):
                 turn,
                 column
             )
-            await infos.client.remove_reaction(
-                game_infos.message,
-                react,
-                res.user
-            )
+            if infos.manage_messages:
+                await infos.client.remove_reaction(
+                    game_infos.message,
+                    react,
+                    res.user
+                )
             if column_full:
                 users = await infos.client.get_reaction_users(
                     res.reaction,
                     limit=50
                 )
-                for u in users:
-                    await infos.client.remove_reaction(
-                        game_infos.message,
-                        react,
-                        u
-                    )
+                if infos.manage_messagee:
+                    for u in users:
+                        await infos.client.remove_reaction(
+                            game_infos.message,
+                            react,
+                            u
+                        )
                 game_infos.reactions[column] = ""
 
             game_infos.turn = game_infos.players[

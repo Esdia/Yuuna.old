@@ -82,8 +82,6 @@ async def navigate_shop(client, message, author, list_pages, reactions, roles):
     i = 0
     maxi = len(list_pages)
 
-    print(reactions)
-
     if maxi == 1:
         # If there is one page, we do not want the arrows to navigate from one page to another
         for react in reactions:
@@ -132,13 +130,15 @@ async def navigate_shop(client, message, author, list_pages, reactions, roles):
             # So to get the role index, we have to add 2 again
             if maxi == 1:
                 role_index += 2
-            await client.clear_reactions(message)
+            if message.server.me.server_permissions.manage_messages:
+                await client.clear_reactions(message)
             return roles[i][role_index]
-        await client.remove_reaction(
-            message,
-            react,
-            author
-        )
+        if message.server.me.server_permissions.manage_messages:
+            await client.remove_reaction(
+                message,
+                react,
+                author
+            )
         await update_message(
             client,
             message,
@@ -151,7 +151,8 @@ async def navigate_shop(client, message, author, list_pages, reactions, roles):
             timeout=60
         )
 
-    await client.clear_reactions(message)
+    if message.server.me.server_permissions.manage_messages:
+        await client.clear_reactions(message)
     return None
 
 

@@ -185,7 +185,7 @@ async def game(infos, game_infos):
             if play is None:
                 await infos.client.send_message(
                     infos.message.channel,
-                    infos.message.text_data["game.chess.warning"].format(
+                    infos.text_data["game.chess.warning"].format(
                         game_infos.players[turn]
                     )
                 )

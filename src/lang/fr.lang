@@ -57,7 +57,7 @@
 
   "game.blackjack.players": "Joueurs :",
   "game.blackjack.turn": "Tour",
-  "game.blackjack.entry.footer": "Cliquez sur J pour rejoindre la partie. Si vous être le créateur, cliquez sur le bouton play pour démarrer la partie.",
+  "game.blackjack.entry.footer": "Cliquez sur J pour rejoindre la partie. Si vous êtes le créateur, cliquez sur le bouton play pour démarrer la partie.",
   "game.blackjack.inactivity.cancel": "La partie de Black Jack a été annulée pour inactivité.",
   "game.blackjack.inactivity.kick": "{} a été éliminé de la partie pour inactivité.",
   "game.blackjack.end": "Fini ! Scores :",

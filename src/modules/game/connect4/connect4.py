@@ -16,15 +16,13 @@ async def update_embed(infos, game_infos, inactivity=False, tie=False):
         head = infos.text_data["game.connect4.inactivity.cancel"]
         value = infos.text_data["game.winner"].format(game_infos.winner.mention)
     elif game_infos.winner is not None:
-        # That's ugly, but the game.winner text has been made so it can be formatted with the player's mention, which we cannot do in the title of a field
-        head = infos.text_data["game.winner"].format(":")
+        head = infos.text_data["game.winner"].format(" ")
         value = game_infos.winner.mention
     elif tie:
         head = infos.text_data["game.tie"]
         value = ":("
     else:
-        # Still ugly, same reason as above
-        head = infos.text_data["game.player.turn"].format(":")
+        head = infos.text_data["game.player.turn"].format(" ")
         value = game_infos.turn.mention
     embed.add_field(
         name=head,

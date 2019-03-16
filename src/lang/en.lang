@@ -38,7 +38,7 @@
   "game.creator": "Created by :",
   "game.tie": "The game is a draw.",
   "game.no_winner": "There is no winner.",
-  "game.winner": "The winner is {}.",
+  "game.winner": "The winner is {}",
   "game.winners": "The winners are {}.",
   "game.player.turn": "Turn of {}",
 

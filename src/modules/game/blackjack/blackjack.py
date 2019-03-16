@@ -29,8 +29,9 @@ async def end(infos, players, message, embed):
             win[0].mention
         )
     else:
+        win_mentions = [m.mention for m in win]
         phrase = infos.text_data["game.winners"].format(
-            ", ".join(win)
+            ", ".join(win_mentions)
         )
 
     await infos.client.clear_reactions(message)

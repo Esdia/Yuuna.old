@@ -172,7 +172,7 @@ async def wait_for_players(infos, message, embed, players):
                 if user == players[0].user:
                     start = True
 
-    if infos.manage_message:
+    if infos.manage_messages:
         await infos.client.clear_reactions(
             message
         )

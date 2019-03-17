@@ -4,7 +4,7 @@ from src.utils.confirm import confirm
 
 # perm is true if the user is allowed to do what they're trying to do
 # bot_perm is true if the bot is allowed to do what the user is trying to do
-def parse_perms(infos, perm, bot_perm, target=None):
+def parse_perms(infos, perm, bot_perm, target=None, mute_command=False):
     if target is not None and target == infos.message.server.owner:
         return infos.text_data["info.error.permission.owner"]
     if not perm:
@@ -15,7 +15,7 @@ def parse_perms(infos, perm, bot_perm, target=None):
         if target is not None and infos.message.author != infos.message.server.owner:
             if target.top_role >= infos.message.author.top_role:
                 return infos.text_data["info.error.permission.author.other_higher"]
-            elif target.top_role >= infos.message.server.me.top_role:
+            elif target.top_role >= infos.message.server.me.top_role and not mute_command:
                 return infos.text_data["info.error.permission.self.other_higher"]
     return "OK"
 
@@ -66,7 +66,8 @@ async def mute(infos):
                 infos,
                 perm,
                 perm_bot,
-                target=m
+                target=m,
+                mute_command=True
             )
             if perm_message != "OK":
                 await infos.client.send_message(
@@ -108,7 +109,8 @@ async def unmute(infos):
                 infos,
                 perm,
                 perm_bot,
-                target=m
+                target=m,
+                mute_command=True
             )
             if perm_message != "OK":
                 await infos.client.send_message(

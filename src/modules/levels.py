@@ -555,7 +555,7 @@ async def give_xp(infos):
             )
         )
 
-        # Whe you level up, you earn 50 coins
+        # When you level up, you earn 50 coins
         await bank_add(
             infos,
             author,

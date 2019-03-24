@@ -244,6 +244,7 @@
 
   "levels.level": "Level",
   "levels.rank": "Rank",
+  "levels.channels": "Channels",
   "levels.error.not_ranked": "The member {} is not ranked. Please talk to earn XP and start getting ranked.",
   "levels.ban": "The channel {} is now banned from the levelling system.",
   "levels.unban": "The channel {} is no longer banned from the levelling system.",
@@ -255,7 +256,8 @@
   "levels.reward.del": "There is now no rewards for reaching level {}.",
   "levels.reward.list": "Reward list",
   "levels.reward.roles": "Roles :",
-  "levels.reward.channels": "Channels",
+  "levels.message.disabled": "The level-up message is now disabled.",
+  "levels.message.enabled": "The level-up message is now enabled.",
   "levels.level_up": "{}, you leveled up, you are now level {}.",
   "levels.no_rewards": "There seems to have no rewards set for now.",
   "levels.banned.list": "Channel list",

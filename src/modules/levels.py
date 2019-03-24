@@ -179,7 +179,7 @@ async def ban_list(infos):
         color=0xD828D0
     )
     embed.add_field(
-        name=infos.text_data["levels.reward.channels"],
+        name=infos.text_data["levels.channels"],
         value=printable,
         inline=False
     )

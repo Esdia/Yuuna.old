@@ -244,6 +244,7 @@
 
   "levels.level": "Niveau",
   "levels.rank": "Rang",
+  "levels.channels": "Salons",
   "levels.error.not_ranked": "Le membre {} n'est pas classé. Veuillez parler pour gagner de l'expérience pour être classé.",
   "levels.ban": "Le salon {} est maintenant banni du système d'XP.",
   "levels.unban": "Le salon {} n'est plus banni du système d'XP.",
@@ -255,7 +256,8 @@
   "levels.reward.del": "Il n'y a maintenant plus de récompense pour le niveau {}.",
   "levels.reward.list": "Liste des récompenses",
   "levels.reward.roles": "Roles :",
-  "levels.reward.channels": "Salons",
+  "levels.message.disabled": "Le message de montée de niveau est maintenant désactivé.",
+  "levels.message.enabled": "Le message de montée de niveau est maintenant activé.",
   "levels.level_up": "{}, vous êtes monté de niveau, vous êtes maintenant niveau {}.",
   "levels.no_rewards": "Il n'y a pas de récompense configurée pour l'instant.",
   "levels.banned.list": "Liste des salons",

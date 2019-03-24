@@ -29,6 +29,22 @@ cannot_disable = [
     "disable"
 ]
 
+aliases_blackjack = [
+    "blackjack",
+    "bj"
+]
+
+aliases_tic_tac_toe = [
+    "tic-tac-toe",
+    "ttt",
+    "morpion"
+]
+
+aliases = [
+    aliases_blackjack,
+    aliases_tic_tac_toe
+]
+
 
 async def is_disabled(infos, command):
     disabled = await infos.storage.smembers("disabled_commands")
@@ -77,10 +93,24 @@ async def enable(infos):
         )
         return
 
+    for al in aliases:
+        if command in al:
+            for al2 in al:
+                await infos.storage.srem(
+                    "disabled_commands",
+                    al2
+                )
+            await infos.client.send_message(
+                infos.message.channel,
+                infos.text_data["enable.enabled"]
+            )
+            return
+
     await infos.storage.srem(
         "disabled_commands",
         command
     )
+
     await infos.client.send_message(
         infos.message.channel,
         infos.text_data["enable.enabled"]
@@ -115,10 +145,24 @@ async def disable(infos):
         )
         return
 
-    await infos.storage.sadd(
+    for al in aliases:
+        if command in al:
+            for al2 in al:
+                await infos.storage.sadd(
+                    "disabled_commands",
+                    al2
+                )
+            await infos.client.send_message(
+                infos.message.channel,
+                infos.text_data["enable.disabled"]
+            )
+            return
+
+    await infos.storage.srem(
         "disabled_commands",
         command
     )
+
     await infos.client.send_message(
         infos.message.channel,
         infos.text_data["enable.disabled"]

@@ -168,7 +168,7 @@ async def on_member_remove(member):
         member.server.owner.id
     )
     logger.info(log)
-    storage = database.get_storage(member.server)
+    storage = await database.get_storage(member.server)
     await storage.delete(
         "user:{}:bank".format(
             member.id

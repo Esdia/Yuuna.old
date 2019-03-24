@@ -573,7 +573,7 @@ async def give_xp(infos):
     )
 
     if level != new_level:
-        disabled = await infos.storage.get("message_disabled")
+        disabled = await infos.storage.get("levels:message_disabled")
         if not disabled:
             await infos.client.send_message(
                 infos.message.channel,

@@ -1,6 +1,7 @@
 import src.modules.help as help_module
 import src.modules.configuration as conf
 import src.modules.moderation as moderation
+import src.modules.disable_commands as disable_commands
 
 import src.modules.game.tic_tac_toe as tic_tac_toe
 import src.modules.game.blackjack.blackjack as black_jack
@@ -52,7 +53,9 @@ async def interpret(infos):
         "mute": moderation.mute,
         "unmute": moderation.unmute,
         "kick": moderation.kick,
-        "ban": moderation.ban
+        "ban": moderation.ban,
+        "enable": disable_commands.enable,
+        "disable": disable_commands.disable
     }
 
     msg = infos.message.content.split()
@@ -62,8 +65,11 @@ async def interpret(infos):
 
     for c in command_list:
         if msg[0] == infos.prefix + c:
-            await command_list[c](infos)
-            return True
+            if await disable_commands.is_disabled(infos, c):
+                return False
+            else:
+                await command_list[c](infos)
+                return True
 
     # prefix and help are the only commands which can always be executed with the default prefix, even if the prefix has been changed
     if msg[0] == "y!prefix":

@@ -29,9 +29,10 @@ Yuuna is a polyvalent discord bot. All her features are fully detailed in her he
 Her command prefix is `y!`. To get started, please use `y!help`. \
 Here's a summary of her main features:
 
-1. Prefix and language configuration :
+1. The bot configuration :
     * You can change Yuuna's command prefix.
     * You can change Yuuna's language between these two : English, French
+    * You can disable every command modules (for example you can disable every bank command by using `y!disable [command]`), except for the configuration commands and the help command.
     
 2. Moderation commands :
     * purge

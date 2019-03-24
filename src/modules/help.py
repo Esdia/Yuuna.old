@@ -78,7 +78,7 @@ def format_embed(nb_fields, text_data, prefix, game=None):
 
 
 async def help_general(infos):
-    nb_fields = [2, 2, 2, 2, 2, 4, 4, 3]
+    nb_fields = [2, 3, 2, 2, 2, 4, 4, 3]
     list_pages = format_embed(
         nb_fields,
         infos.text_data,

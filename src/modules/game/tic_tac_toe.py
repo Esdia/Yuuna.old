@@ -202,6 +202,7 @@ async def entry(infos):
                 infos.message.channel,
                 infos.text_data["game.tic-tac-toe.inactivity.cancel"]
             )
+            del player_dict[infos.message.channel.id]
     else:
         await infos.client.send_message(
             infos.message.channel,

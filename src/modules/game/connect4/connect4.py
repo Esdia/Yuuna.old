@@ -138,7 +138,7 @@ async def game(infos, game_infos):
                     res.reaction,
                     limit=50
                 )
-                if infos.manage_messagee:
+                if infos.manage_messages:
                     for u in users:
                         await infos.client.remove_reaction(
                             game_infos.message,

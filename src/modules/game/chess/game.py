@@ -222,11 +222,11 @@ async def game(infos, game_infos):
                         turn
                     ]
                 )
-            if parsed_play is not None:
-                await infos.client.send_message(
-                    infos.message.channel,
-                    parsed_play
-                )
+                if parsed_play is not None:
+                    await infos.client.send_message(
+                        infos.message.channel,
+                        parsed_play
+                    )
 
         turn = 1 - turn
         await update_message(infos, game_infos)

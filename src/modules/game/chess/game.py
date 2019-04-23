@@ -71,7 +71,7 @@ def parse_input(infos, play, game_infos, color):
                         # We move the king
                         game_infos.play_move(line, 4, line, 6)
                         # And we move the rook
-                        game_infos.play_move(line, 0, line, 5)
+                        game_infos.play_move(line, 7, line, 5)
                         return None
             else:
                 return infos.text_data["game.chess.error.castle.king_rook"]

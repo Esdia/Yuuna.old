@@ -128,7 +128,7 @@ async def wait_for_players(infos, message, embed, players):
             timeout=120
         )
         if res is None:
-            if infos.manage_message:
+            if infos.manage_messages:
                 await infos.client.clear_reactions(
                     message
                 )

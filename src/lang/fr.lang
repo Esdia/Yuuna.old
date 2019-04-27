@@ -15,7 +15,7 @@
   "bank.rank": "Rang",
   "bank.banktop": "Classement des richesses",
   "bank.add": "{} a reçu {} Coins.",
-  "bank.remove": "{} Coins ont été retirés au compte de {}.",
+  "bank.remove": "{} a été soulagé(e) de {} Coins.",
   "bank.set": "{} possède maintenant {} Coins.",
   "bank.not_enough_coins": "Vous n'avez pas assez de Coins pour cela.",
 
@@ -258,7 +258,7 @@
   "levels.reward.roles": "Roles :",
   "levels.message.disabled": "Le message de montée de niveau est maintenant désactivé.",
   "levels.message.enabled": "Le message de montée de niveau est maintenant activé.",
-  "levels.level_up": "{}, vous êtes monté de niveau, vous êtes maintenant niveau {}.",
+  "levels.level_up": "{}, vous êtes maintenant niveau {}.",
   "levels.no_rewards": "Il n'y a pas de récompense configurée pour l'instant.",
   "levels.banned.list": "Liste des salons",
   "levels.no_banned": "Il n'y a pas de salons bannis pour l'instant.",

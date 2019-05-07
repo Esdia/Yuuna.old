@@ -11,9 +11,9 @@ async def update_message(client, message, embed):
     )
 
 
-async def navigate(client, message, author, list_pages):
+async def navigate(client, message, author, list_pages, first=0):
     # i is the index of the page we are viewing, in a the list of pages
-    i = 0
+    i = first
     maxi = len(list_pages)
     reactions = ['⬅', '➡']
 

@@ -1,3 +1,6 @@
+from src.utils.perm import allowed
+
+
 # This function allows the user to change the server-local command prefix
 async def prefix(infos):
     msg = infos.message.content.split()
@@ -17,7 +20,7 @@ async def prefix(infos):
         )
 
     else:
-        if infos.message.author.server_permissions.manage_server:
+        if not allowed(infos, "manage_server"):
             await infos.storage.set(
                 "prefix",
                 msg[1]
@@ -39,7 +42,7 @@ async def prefix(infos):
 async def language(infos):
     msg = infos.message.content.split()
 
-    if not infos.message.author.server_permissions.manage_server:
+    if not allowed(infos, "manage_server"):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["info.error.permission.author.missing"]

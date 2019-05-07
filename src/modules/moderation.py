@@ -1,5 +1,6 @@
 import discord
 from src.utils.confirm import confirm
+from src.utils.perm import allowed
 
 
 # perm is true if the user is allowed to do what they're trying to do
@@ -7,7 +8,7 @@ from src.utils.confirm import confirm
 def parse_perms(infos, perm, bot_perm, target=None, mute_command=False):
     if target is not None and target == infos.message.server.owner:
         return infos.text_data["info.error.permission.owner"]
-    if not perm:
+    if not allowed(infos, perm):
         return infos.text_data["info.error.permission.author.missing"]
     elif not bot_perm:
         return infos.text_data["info.error.permission.self.missing"]
@@ -21,7 +22,7 @@ def parse_perms(infos, perm, bot_perm, target=None, mute_command=False):
 
 
 async def purge(infos):
-    perm = infos.message.author.server_permissions.manage_messages
+    perm = "manage_messages"
     perm_bot = infos.message.server.me.server_permissions.manage_messages
     perm_message = parse_perms(
         infos,
@@ -56,7 +57,7 @@ async def mute(infos):
             infos.text_data["info.error.syntax"]
         )
     else:
-        perm = infos.message.author.server_permissions.manage_messages
+        perm = "manage_messages"
         perm_bot = infos.message.server.me.server_permissions.manage_channels
 
         channels = [c for c in infos.message.server.channels if c.type == discord.ChannelType.text]
@@ -99,7 +100,7 @@ async def unmute(infos):
             infos.text_data["info.error.syntax"]
         )
     else:
-        perm = infos.message.author.server_permissions.manage_messages
+        perm = "manage_messages"
         perm_bot = infos.message.server.me.server_permissions.manage_channels
 
         channels = [c for c in infos.message.server.channels if c.type == discord.ChannelType.text]
@@ -139,7 +140,7 @@ async def kick(infos):
             infos.text_data["info.error.syntax"]
         )
     else:
-        perm = infos.message.author.server_permissions.kick_members
+        perm = "kick_members"
         perm_bot = infos.message.server.me.server_permissions.kick_members
 
         for m in members:
@@ -172,7 +173,7 @@ async def ban(infos):
             infos.text_data["info.error.syntax"]
         )
     else:
-        perm = infos.message.author.server_permissions.ban_members
+        perm = "ban_members"
         perm_bot = infos.message.server.me.server_permissions.ban_members
 
         for m in members:

@@ -8,21 +8,55 @@ async def interpret(infos):
     if len(msg) == 1:
         await help_general(infos)
     else:
-        func_list = {"tic-tac-toe": help_tic_tac_toe,
-                     "ttt": help_tic_tac_toe,
-                     "connect4": help_connect4,
-                     "blackjack": help_blackjack,
-                     "bj": help_blackjack,
-                     "chess": help_chess}
+        func_list = {
+            "tic-tac-toe": help_tic_tac_toe,
+            "ttt": help_tic_tac_toe,
+            "connect4": help_connect4,
+            "blackjack": help_blackjack,
+            "bj": help_blackjack,
+            "chess": help_chess
+        }
 
         if msg[1] in func_list:
             function = func_list[msg[1]]
             await function(infos)
         else:
-            await infos.client.send_message(
-                infos.message.channel,
-                infos.text_data["info.error.syntax"]
-            )
+            """
+                For example if you type `y!help games` we want to print the general
+                help, but starting from the 6th page
+            """
+            first_dict = {
+                "conf": 1,
+                "config": 1,
+                "configuration": 1,
+
+                "XP": 2,
+                "level": 2,
+                "rank": 2,
+
+                "bank": 3,
+                "coins": 3,
+
+                "autorole": 4,
+                "automatics": 4,
+
+                "games": 5,
+                "jeux": 5,  # french for "games"
+
+                "moderation": 6,
+                "mod": 6,
+
+                "about": 7,
+                "contact": 7
+            }
+
+            if msg[1] in first_dict:
+                await help_general(infos, first=first_dict[msg[1]])
+            else:
+                await infos.client.send_message(
+                    infos.message.channel,
+                    infos.text_data["info.error.syntax"]
+                )
 
 
 # Given the number of fields for each page, this function creates a list of embed messages, one for each page
@@ -77,7 +111,7 @@ def format_embed(nb_fields, text_data, prefix, game=None):
     return list_pages
 
 
-async def help_general(infos):
+async def help_general(infos, first=0):
     nb_fields = [2, 3, 2, 2, 2, 4, 4, 3]
     list_pages = format_embed(
         nb_fields,
@@ -87,13 +121,14 @@ async def help_general(infos):
 
     message_help = await infos.client.send_message(
         infos.message.channel,
-        embed=list_pages[0]
+        embed=list_pages[first]
     )
     await navigate(
         infos.client,
         message_help,
         infos.message.author,
-        list_pages
+        list_pages,
+        first=first
     )
 
 

@@ -170,7 +170,7 @@
   "help.page.1.title": "Aide - Yuuna",
   "help.page.1.description": "Pour tester la latence du bot, utilisez `{}ping`\nLes [] ne  doivent pas être utilisés dans les commandes, ils représentent des variables.\nComme expliqué en page 2, vous pouvez changer le préfixe, mais vous pouvez toujours utiliser `y!help`, avec le préfixe par défaut, pour voir cette page.",
   "help.page.1.field_name_1": "Comment ça marche",
-  "help.page.1.field_value_1": "Chaque page correspond à un type de commandes. Cliquez sur les flèches en réactions pour naviguer d'une page à l'autre",
+  "help.page.1.field_value_1": "Chaque page correspond à un type de commandes. Cliquez sur les flèches en réactions pour naviguer d'une page à l'autre.\nVous pouvez utiliser `y!help [module]` pour afficher à partir de la page du module spécifié au lieu de la première page.\nNom des modules:\nPage 2: `config`\nPage 3: `XP`\nPage 4: `bank`\nPage 5: `autorole`\nPage 6: `games`\nPage 7: `moderation`\nPage 8: `about`",
   "help.page.1.field_name_2": "Sommaire",
   "help.page.1.field_value_2": "1. Cette page.\n2. La configuration du bot.\n3. Le système d'XP.\n4. La banque et la boutique.\n5. Les rôles automatiques.\n6. Les jeux.\n7. Les commandes de modérations.\n8. Infos sur le bot et le développeur.",
 

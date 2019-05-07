@@ -2,6 +2,7 @@ from discord import Embed
 from discord import utils
 
 from src.utils.confirm import confirm
+from src.utils.perm import allowed
 
 """
     This module manages the autorole
@@ -77,7 +78,7 @@ async def del_autorole(infos):
 
 
 async def interpret(infos):
-    if not infos.message.author.server_permissions.manage_server:
+    if not allowed(infos, "manage_server"):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["info.error.permission.author.missing"]

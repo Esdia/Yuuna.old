@@ -1,3 +1,5 @@
+from src.utils.perm import allowed
+
 command_list = [
     "ping",
     "blackjack",
@@ -55,7 +57,7 @@ async def is_disabled(infos, command):
 
 
 async def allowed(infos):
-    if not infos.message.author.server_permissions.manage_server:
+    if not allowed(infos, "manage_server"):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["info.error.permission.author.missing"]

@@ -3,6 +3,7 @@ from discord import utils
 
 from src.utils.navigate import navigate
 from src.utils.confirm import confirm
+from src.utils.perm import allowed
 
 
 async def get_coins(storage, member):
@@ -270,7 +271,7 @@ async def interpret(infos):
     msg = infos.message.content.split()
     if len(msg) > 1:
         if msg[1] in ["add", "remove", "set"]:
-            if not infos.message.author.server_permissions.manage_messages:
+            if not allowed(infos, "manage_message"):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["info.error.permission.author.missing"]

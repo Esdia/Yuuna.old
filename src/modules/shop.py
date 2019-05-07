@@ -1,6 +1,8 @@
 from discord import Embed, utils
 from src.modules.bank import get_coins, bank_remove
 
+from src.utils.perm import allowed
+
 reactions_template = [
     '⬅',
     '➡',
@@ -375,7 +377,7 @@ async def interpret(infos):
     if len(msg) == 1:
         await display_shop(infos)
     else:
-        if not infos.message.author.server_permissions.manage_roles:
+        if not allowed(infos, "manage_roles"):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["info.error.permission.author.missing"]

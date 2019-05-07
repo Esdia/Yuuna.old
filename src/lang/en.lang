@@ -170,7 +170,7 @@
   "help.page.1.title": "Help - Yuuna",
   "help.page.1.description": "To test the latency of the bot, please type `{}ping`\n[] are not to be used in the actual command, they mean that a variable is supposed to be used there.\nAs explained on page 2, you can change the prefix, but you can always use `y!help`, with the default prefix, to see this page.",
   "help.page.1.field_name_1": "How it works",
-  "help.page.1.field_value_1": "Each help page refer to a type of command, please click on the arrows in the reactions to navigate from a page to another.",
+  "help.page.1.field_value_1": "Each help page refer to a type of command, please click on the arrows in the reactions to navigate from a page to another.\nYou can use `y!help [module]` to start on the page of the module instead of the first page.\nModule names :\nPage 2: `config`\nPage 3: `XP`\nPage 4: `bank`\nPage 5: `autorole`\nPage 6: `games`\nPage 7: `moderation`\nPage 8: `about`",
   "help.page.1.field_name_2": "Summary",
   "help.page.1.field_value_2": "1. This page.\n2. The bot configuration.\n3. The levelling system.\n4. The bank and the shop.\n5. The automatics roles.\n6. The games.\n7. The moderation commands.\n8. Infos about the bot and the developer.",
 

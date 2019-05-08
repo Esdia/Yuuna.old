@@ -241,6 +241,9 @@
   "help.page.8.field_name_3": "Le code source de Yuuna",
   "help.page.8.field_value_3": "Le code de Yuuna est totalement open source, n'hésitez pas à consulter son code source sur github : https://github.com/Esdia/Yuuna",
 
+  "ignore_confirm.disable": "Je demanderai une confirmation quand vous entrerez certaines commandes.",
+  "ignore_confirm.enable": "Je ne demanderai plus de confirmation quand vous entrerez certaines commandes.",
+
   "info.error.permission.owner": "[ERREUR] : Vous ne pouvez pas affecter le propriétaire du serveur.",
   "info.error.permission.author.missing": "[ERREUR] : Il vous manque des permission pour utiliser cette commande.",
   "info.error.permission.author.other_higher": "[ERREUR] : Vous essayez d'affecter quelqu'un avec un role plus élevé que le votre.",

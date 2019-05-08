@@ -1,4 +1,8 @@
 async def confirm(infos):
+    ignore_confirm = await infos.storage.get("ignore_confirm")
+    if ignore_confirm:
+        return True
+
     message = await infos.client.send_message(
         infos.message.channel,
         infos.text_data["utils.confirm"]

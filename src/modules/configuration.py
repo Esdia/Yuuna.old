@@ -158,3 +158,33 @@ async def bot_master(infos):
             infos.message.channel,
             infos.text_data["info.error.syntax"]
         )
+
+
+async def confirm(infos):
+    if not await allowed(infos, "manage_server"):
+        await infos.client.send_message(
+            infos.message.channel,
+            infos.text_data["info.error.permission.author.missing"]
+        )
+        return
+
+    msg = infos.message.content.split()
+    if len(msg) != 2 or msg[1] not in ["0", "1"]:
+        await infos.client.send_message(
+            infos.message.channel,
+            infos.text_data["info.error.syntax"]
+        )
+        return
+
+    if msg[1] == "1":
+        await infos.storage.delete("ignore_confirm")
+        await infos.client.send_message(
+            infos.message.channel,
+            infos.text_data["ignore_confirm.disable"]
+        )
+    else:
+        await infos.storage.set("ignore_confirm", "1")
+        await infos.client.send_message(
+            infos.message.channel,
+            infos.text_data["ignore_confirm.enable"]
+        )

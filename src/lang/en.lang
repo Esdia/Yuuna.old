@@ -241,6 +241,9 @@
   "help.page.8.field_name_3": "Yuuna's source code",
   "help.page.8.field_value_3": "Yuuna's code is fully open source, feel free to check the code on github : https://github.com/Esdia/Yuuna",
 
+  "ignore_confirm.disable": "I will ask for a confirmation when you use some commands.",
+  "ignore_confirm.enable": "I will no longer ask for a confirmation when you use a command.",
+
   "info.error.permission.owner": "[ERROR] : You can't affect the owner of the server",
   "info.error.permission.author.missing": "[ERROR] : You are missing permissions to use this command.",
   "info.error.permission.author.other_higher": "[ERROR] : You are trying to affect someone with a higher role than yours.",

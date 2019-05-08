@@ -251,6 +251,25 @@ async def disable_message(infos):
     )
 
 
+async def set_message(infos, msg):
+    await infos.storage.set(
+        "levels:message",
+        " ".join(msg)
+    )
+    await infos.client.send_message(
+        infos.message.channel,
+        infos.text_data["levels.message.set"]
+    )
+
+
+async def reset_message(infos):
+    await infos.storage.delete("levels:message")
+    await infos.client.send_message(
+        infos.message.channel,
+        infos.text_data["levels.message.reset"]
+    )
+
+
 # Called when we have a command that starts exactly by "y!rank". ranktop is not included
 async def interpret(infos):
     msg = infos.message.content.split()
@@ -281,16 +300,24 @@ async def interpret(infos):
                     await reset(infos, members)
 
             elif msg[1] == "message":
-                if not (len(msg) == 3 and msg[2] in ["0", "1"]):
-                    await infos.client.send_message(
-                        infos.message.channel,
-                        infos.text_data["info.error.syntax"]
-                    )
-                else:
+                if len(msg) == 3:
                     if msg[2] == "1":
                         await enable_message(infos)
-                    else:
+                        return
+                    elif msg[2] == "0":
                         await disable_message(infos)
+                        return
+                    elif msg[2] == "reset":
+                        await reset_message(infos)
+                        return
+                elif len(msg) > 2:
+                    await set_message(infos, msg[2:])
+                    return
+
+                await infos.client.send_message(
+                    infos.message.channel,
+                    infos.text_data["info.error.syntax"]
+                )
 
             elif msg[1] == "antispam":
                 if not (len(msg) == 3 and (msg[2].isdigit() or msg[2] == "reset")):
@@ -617,11 +644,14 @@ async def give_xp(infos):
     if level != new_level:
         disabled = await infos.storage.get("levels:message_disabled")
         if not disabled:
+            message = await infos.storage.get("levels:message")
+            message = infos.text_data["levels.level_up"] if message is None else str(message)
+
             await infos.client.send_message(
                 infos.message.channel,
-                infos.text_data["levels.level_up"].format(
-                    author.mention,
-                    new_level
+                message.format(
+                    player=author.mention,
+                    level=new_level
                 )
             )
 

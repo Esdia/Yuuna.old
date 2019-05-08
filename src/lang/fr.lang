@@ -19,6 +19,12 @@
   "bank.set": "{} possède maintenant {} Coins.",
   "bank.not_enough_coins": "Vous n'avez pas assez de Coins pour cela.",
 
+  "bot_master.del": "Le rôle maître du bot a été supprimé.",
+  "bot_master.no_role": "Il n'y a pas de rôle maître du bot.",
+  "bot_master.role": "Le rôle maître du bot est {}.",
+  "bot_master.self_del": "Vous ne pouvez pas supprimer le rôle maître du bot car vous vous retireriez des permissions.",
+  "bot_master.set": "Le rôle {} est maintenant le rôle maître du bot.",
+
   "command.levels.enable": "Le système d'XP a été activé.",
   "command.levels.disable": "Le système d'XP a été désactivé.",
   "command.levels.ban_channel": "Le salon {} est maintenant banni du système d'XP.",

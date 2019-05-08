@@ -271,7 +271,7 @@ async def interpret(infos):
     msg = infos.message.content.split()
     if len(msg) > 1:
         if msg[1] in ["add", "remove", "set"]:
-            if not allowed(infos, "manage_message"):
+            if not await allowed(infos, "manage_message"):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["info.error.permission.author.missing"]

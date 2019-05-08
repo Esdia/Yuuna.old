@@ -256,7 +256,7 @@ async def interpret(infos):
     msg = infos.message.content.split()
     if len(msg) > 1:
         if msg[1] in ["ban", "unban", "0", "1", "reset", "message"]:
-            if not allowed(infos, "manage_message"):
+            if not await allowed(infos, "manage_message"):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["info.error.permission.author.missing"]
@@ -472,7 +472,7 @@ async def del_reward(infos, level):
 async def rewards_interpret(infos):
     msg = infos.message.content.split()
 
-    if not allowed(infos, "manage_server"):
+    if not await allowed(infos, "manage_server"):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["info.error.permission.author.missing"]

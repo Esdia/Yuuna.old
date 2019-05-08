@@ -377,7 +377,7 @@ async def interpret(infos):
     if len(msg) == 1:
         await display_shop(infos)
     else:
-        if not allowed(infos, "manage_roles"):
+        if not await allowed(infos, "manage_roles"):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["info.error.permission.author.missing"]

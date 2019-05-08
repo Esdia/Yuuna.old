@@ -56,7 +56,7 @@ async def is_disabled(infos, command):
     return command in disabled
 
 
-async def allowed(infos):
+async def is_allowed(infos):
     if not allowed(infos, "manage_server"):
         await infos.client.send_message(
             infos.message.channel,
@@ -68,7 +68,7 @@ async def allowed(infos):
 
 
 async def enable(infos):
-    if not await allowed(infos):
+    if not await is_allowed(infos):
         return
 
     msg = infos.message.content.split()
@@ -120,7 +120,7 @@ async def enable(infos):
 
 
 async def disable(infos):
-    if not await allowed(infos):
+    if not await is_allowed(infos):
         return
 
     msg = infos.message.content.split()

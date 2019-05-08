@@ -55,7 +55,8 @@ async def interpret(infos):
         "kick": moderation.kick,
         "ban": moderation.ban,
         "enable": disable_commands.enable,
-        "disable": disable_commands.disable
+        "disable": disable_commands.disable,
+        "master": conf.bot_master
     }
 
     msg = infos.message.content.split()

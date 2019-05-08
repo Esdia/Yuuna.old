@@ -78,7 +78,7 @@ async def del_autorole(infos):
 
 
 async def interpret(infos):
-    if not allowed(infos, "manage_server"):
+    if not await allowed(infos, "manage_server"):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["info.error.permission.author.missing"]

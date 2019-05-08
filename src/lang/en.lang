@@ -19,6 +19,12 @@
   "bank.set": "{}'s bank account has been set to {} coins.",
   "bank.not_enough_coins": "You do not have enough coins to do that.",
 
+  "bot_master.del": "The bot master role has been deleted.",
+  "bot_master.no_role": "There is no bot master role.",
+  "bot_master.role": "The current bot master role is {}.",
+  "bot_master.self_del": "You cannot delete the bot master role as you would remove your own permissions.",
+  "bot_master.set": "The role {} is now the bot master.",
+
   "command.levels.enable": "The levelling system has been enabled.",
   "command.levels.disable": "The levelling system has been disabled",
   "command.levels.ban_channel": "The channel {} is now banned from the levelling system.",

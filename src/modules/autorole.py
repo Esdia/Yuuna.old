@@ -79,32 +79,29 @@ async def del_autorole(infos):
 
 async def interpret(infos):
     if not await allowed(infos, "manage_server"):
-        await infos.client.send_message(
-            infos.message.channel,
-            infos.text_data["info.error.permission.author.missing"]
-        )
+        return
+
+    msg = infos.message.content.split()
+    # If 1, msg = "y!autorole", i.e. we want to check it
+    if len(msg) == 1:
+        await get_autorole(infos)
     else:
-        msg = infos.message.content.split()
-        # If 1, msg = "y!autorole", i.e. we want to check it
-        if len(msg) == 1:
-            await get_autorole(infos)
-        else:
-            if msg[1] == "set":
-                roles = infos.message.role_mentions
-                if not roles:
-                    await infos.client.send_message(
-                        infos.message.channel,
-                        infos.text_data["info.error.syntax"]
-                    )
-                else:
-                    await set_autorole(
-                        infos,
-                        roles[0]
-                    )
-            elif msg[1] == "delete":
-                await del_autorole(infos)
-            else:
+        if msg[1] == "set":
+            roles = infos.message.role_mentions
+            if not roles:
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["info.error.syntax"]
                 )
+            else:
+                await set_autorole(
+                    infos,
+                    roles[0]
+                )
+        elif msg[1] == "delete":
+            await del_autorole(infos)
+        else:
+            await infos.client.send_message(
+                infos.message.channel,
+                infos.text_data["info.error.syntax"]
+            )

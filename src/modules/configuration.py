@@ -22,21 +22,18 @@ async def prefix(infos):
 
     else:
         if not await allowed(infos, "manage_server"):
-            await infos.storage.set(
-                "prefix",
+            return
+
+        await infos.storage.set(
+            "prefix",
+            msg[1]
+        )
+        await infos.client.send_message(
+            infos.message.channel,
+            infos.text_data["config.prefix.set"].format(
                 msg[1]
             )
-            await infos.client.send_message(
-                infos.message.channel,
-                infos.text_data["config.prefix.set"].format(
-                    msg[1]
-                )
-            )
-        else:
-            await infos.client.send_message(
-                infos.message.channel,
-                infos.text_data["infos.error.permission.author.missing"]
-            )
+        )
 
 
 # This function allows the user to change the server-local language
@@ -44,36 +41,32 @@ async def language(infos):
     msg = infos.message.content.split()
 
     if not await allowed(infos, "manage_server"):
+        return
+
+    if len(msg) != 2 or infos.message.mentions or infos.message.channel_mentions or infos.message.role_mentions:
         await infos.client.send_message(
             infos.message.channel,
-            infos.text_data["info.error.permission.author.missing"]
+            infos.text_data["info.error.syntax"]
         )
-
     else:
-        if len(msg) != 2 or infos.message.mentions or infos.message.channel_mentions or infos.message.role_mentions:
+        if msg[1] not in ["en", "fr"]:
             await infos.client.send_message(
                 infos.message.channel,
-                infos.text_data["info.error.syntax"]
+                infos.text_data["config.language.not_found"]
             )
         else:
-            if msg[1] not in ["en", "fr"]:
-                await infos.client.send_message(
-                    infos.message.channel,
-                    infos.text_data["config.language.not_found"]
+            await infos.storage.set(
+                "language",
+                msg[1]
+            )
+            await infos.client.send_message(
+                infos.message.channel,
+                infos.text_data["config.language.set"].format(
+                    infos.text_data[
+                        "language.{}".format(msg[1])
+                    ]
                 )
-            else:
-                await infos.storage.set(
-                    "language",
-                    msg[1]
-                )
-                await infos.client.send_message(
-                    infos.message.channel,
-                    infos.text_data["config.language.set"].format(
-                        infos.text_data[
-                            "language.{}".format(msg[1])
-                        ]
-                    )
-                )
+            )
 
 
 # Return the bot_master role
@@ -103,10 +96,6 @@ async def bot_master(infos):
     msg = infos.message.content.split()
 
     if not await allowed(infos, "manage_server"):
-        await infos.client.send_message(
-            infos.message.channel,
-            infos.text_data["info.error.permission.author.missing"]
-        )
         return
 
     if len(msg) == 1:
@@ -162,10 +151,6 @@ async def bot_master(infos):
 
 async def confirm(infos):
     if not await allowed(infos, "manage_server"):
-        await infos.client.send_message(
-            infos.message.channel,
-            infos.text_data["info.error.permission.author.missing"]
-        )
         return
 
     msg = infos.message.content.split()

@@ -272,43 +272,40 @@ async def interpret(infos):
     if len(msg) > 1:
         if msg[1] in ["add", "remove", "set"]:
             if not await allowed(infos, "manage_message"):
+                return
+
+            numbers = [i for i in msg if i.isdigit()]
+            members = infos.message.mentions
+            if not (numbers and members):
                 await infos.client.send_message(
                     infos.message.channel,
-                    infos.text_data["info.error.permission.author.missing"]
+                    infos.text_data["info.error.syntax"]
                 )
             else:
-                numbers = [i for i in msg if i.isdigit()]
-                members = infos.message.mentions
-                if not (numbers and members):
-                    await infos.client.send_message(
-                        infos.message.channel,
-                        infos.text_data["info.error.syntax"]
-                    )
-                else:
-                    n = int(numbers[0])
-                    n = -n if n < 0 else n
-                    if await confirm(infos):
-                        if msg[1] == "add":
-                            for m in members:
-                                await bank_add(
-                                    infos,
-                                    m,
-                                    n
-                                )
-                        elif msg[1] == "remove":
-                            for m in members:
-                                await bank_remove(
-                                    infos,
-                                    m,
-                                    n
-                                )
-                        else:
-                            for m in members:
-                                await bank_set(
-                                    infos,
-                                    m,
-                                    n
-                                )
+                n = int(numbers[0])
+                n = -n if n < 0 else n
+                if await confirm(infos):
+                    if msg[1] == "add":
+                        for m in members:
+                            await bank_add(
+                                infos,
+                                m,
+                                n
+                            )
+                    elif msg[1] == "remove":
+                        for m in members:
+                            await bank_remove(
+                                infos,
+                                m,
+                                n
+                            )
+                    else:
+                        for m in members:
+                            await bank_set(
+                                infos,
+                                m,
+                                n
+                            )
         elif msg[1] == "pay":
             numbers = [int(i) for i in msg if i.isdigit()]
             members = infos.message.mentions

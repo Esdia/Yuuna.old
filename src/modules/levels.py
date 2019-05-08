@@ -257,46 +257,43 @@ async def interpret(infos):
     if len(msg) > 1:
         if msg[1] in ["ban", "unban", "0", "1", "reset", "message"]:
             if not await allowed(infos, "manage_message"):
-                await infos.client.send_message(
-                    infos.message.channel,
-                    infos.text_data["info.error.permission.author.missing"]
-                )
-            else:
-                if msg[1] in ["ban", "unban"]:
-                    channels = infos.message.channel_mentions
-                    if not channels:
-                        if msg[1] == "ban":
-                            await ban_list(infos)
-                        else:
-                            await infos.client.send_message(
-                                infos.message.channel,
-                                infos.text_data["info.error.syntax"]
-                            )
-                    elif msg[1] == "ban":
-                        await ban(infos, channels)
+                return
+
+            if msg[1] in ["ban", "unban"]:
+                channels = infos.message.channel_mentions
+                if not channels:
+                    if msg[1] == "ban":
+                        await ban_list(infos)
                     else:
-                        await unban(infos, channels)
-                elif msg[1] == "reset":
-                    if await confirm(infos):
-                        members = infos.message.mentions
-                        members = infos.message.server.members if not members else members
-                        await reset(infos, members)
-                elif msg[1] == "message":
-                    if not (len(msg) == 3 and msg[2] in ["0", "1"]):
                         await infos.client.send_message(
                             infos.message.channel,
                             infos.text_data["info.error.syntax"]
                         )
-                    else:
-                        if msg[2] == "1":
-                            await enable_message(infos)
-                        else:
-                            await disable_message(infos)
+                elif msg[1] == "ban":
+                    await ban(infos, channels)
                 else:
-                    if msg[1] == "1":
-                        await enable(infos)
+                    await unban(infos, channels)
+            elif msg[1] == "reset":
+                if await confirm(infos):
+                    members = infos.message.mentions
+                    members = infos.message.server.members if not members else members
+                    await reset(infos, members)
+            elif msg[1] == "message":
+                if not (len(msg) == 3 and msg[2] in ["0", "1"]):
+                    await infos.client.send_message(
+                        infos.message.channel,
+                        infos.text_data["info.error.syntax"]
+                    )
+                else:
+                    if msg[2] == "1":
+                        await enable_message(infos)
                     else:
-                        await disable(infos)
+                        await disable_message(infos)
+            else:
+                if msg[1] == "1":
+                    await enable(infos)
+                else:
+                    await disable(infos)
         else:
             mentions = infos.message.mentions
             if not mentions:
@@ -473,11 +470,9 @@ async def rewards_interpret(infos):
     msg = infos.message.content.split()
 
     if not await allowed(infos, "manage_server"):
-        await infos.client.send_message(
-            infos.message.channel,
-            infos.text_data["info.error.permission.author.missing"]
-        )
-    elif len(msg) == 1:
+        return
+
+    if len(msg) == 1:
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["info.error.syntax"]

@@ -271,6 +271,10 @@
   "levels.no_rewards": "There seems to have no rewards set for now.",
   "levels.banned.list": "Channel list",
   "levels.no_banned": "There seems to have no banned channels for now.",
+  "levels.no_antispam": "The antispam for the levelling system has been disabled.",
+  "levels.antispam": "The antispam delay for the levelling system is now {} seconds.",
+  "levels.bank_reward.set": "The reward for levelling up is now {} Coins.",
+
 
   "moderation.mute.muted": "{} is now muted.",
   "moderation.mute.unmuted": "{} is no longer muted.",

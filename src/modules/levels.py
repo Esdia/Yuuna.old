@@ -255,8 +255,8 @@ async def disable_message(infos):
 async def interpret(infos):
     msg = infos.message.content.split()
     if len(msg) > 1:
-        if msg[1] in ["ban", "unban", "0", "1", "reset", "message"]:
-            if not await allowed(infos, "manage_message"):
+        if msg[1] in ["ban", "unban", "0", "1", "reset", "message", "antispam", "bankreward"]:
+            if not await allowed(infos, "manage_messages"):
                 return
 
             if msg[1] in ["ban", "unban"]:
@@ -273,11 +273,13 @@ async def interpret(infos):
                     await ban(infos, channels)
                 else:
                     await unban(infos, channels)
+
             elif msg[1] == "reset":
                 if await confirm(infos):
                     members = infos.message.mentions
                     members = infos.message.server.members if not members else members
                     await reset(infos, members)
+
             elif msg[1] == "message":
                 if not (len(msg) == 3 and msg[2] in ["0", "1"]):
                     await infos.client.send_message(
@@ -289,6 +291,45 @@ async def interpret(infos):
                         await enable_message(infos)
                     else:
                         await disable_message(infos)
+
+            elif msg[1] == "antispam":
+                if not (len(msg) == 3 and (msg[2].isdigit() or msg[2] == "reset")):
+                    await infos.client.send_message(
+                        infos.message.channel,
+                        infos.text_data["info.error.syntax"]
+                    )
+                else:
+                    if msg[2] == "reset":
+                        delay = "60"
+                    else:
+                        delay = msg[2]
+
+                    await infos.storage.set("xp_antispam", delay)
+                    if delay == "0":
+                        await infos.client.send_message(
+                            infos.message.channel,
+                            infos.text_data["levels.no_antispam"]
+                        )
+                    else:
+                        await infos.client.send_message(
+                            infos.message.channel,
+                            infos.text_data["levels.antispam"].format(delay)
+                        )
+
+            elif msg[1] == "bankreward":
+                if not (len(msg) == 3 and msg[2].isdigit()):
+                    await infos.client.send_message(
+                        infos.message.channel,
+                        infos.text_data["info.error.syntax"]
+                    )
+                else:
+                    reward = msg[2]
+                    await infos.storage.set("levels:bank_reward", reward)
+                    await infos.client.send_message(
+                        infos.message.channel,
+                        infos.text_data["levels.bank_reward.set"].format(reward)
+                    )
+
             else:
                 if msg[1] == "1":
                     await enable(infos)
@@ -561,13 +602,17 @@ async def give_xp(infos):
 
     new_level = get_level(xp + given_xp)
 
-    await infos.storage.set(
-        "user:{}:anti_spam".format(
-            author.id
-        ),
-        1,
-        expire=60
-    )
+    delay = await infos.storage.get("xp_antispam")
+    delay = 60 if delay is None else int(delay)
+
+    if delay != 0:
+        await infos.storage.set(
+            "user:{}:anti_spam".format(
+                author.id
+            ),
+            1,
+            expire=delay
+        )
 
     if level != new_level:
         disabled = await infos.storage.get("levels:message_disabled")
@@ -580,26 +625,28 @@ async def give_xp(infos):
                 )
             )
 
+        # When you level up, you can earn some coins
+        bank_reward = await infos.storage.get("levels:bank_reward")
+        bank_reward = 50 if bank_reward is None else int(bank_reward)
+        await bank_add(
+            infos,
+            author,
+            bank_reward,
+            level_up=True
+        )
+
         reward_id = await infos.storage.get(
             "levels:reward:{}".format(
                 new_level
             )
         )
-
-        # When you level up, you earn 50 coins
-        await bank_add(
-            infos,
-            author,
-            50,
-            level_up=True
-        )
-
         if reward_id is not None:
             reward = utils.get(
                 infos.message.server.roles,
                 id=reward_id
             )
-            await infos.client.add_roles(
-                author,
-                reward
-            )
+            if reward is not None:
+                await infos.client.add_roles(
+                    author,
+                    reward
+                )

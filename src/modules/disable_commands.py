@@ -2,6 +2,19 @@ from src.utils.perm import allowed
 
 command_list = [
     "ping",
+    "autorole",
+
+    "master",
+    "confirm"
+
+    "rank",
+    "ranktop",
+    "reward",
+
+    "bank",
+    "banktop",
+    "shop",
+
     "blackjack",
     "bj",
     "chess",
@@ -9,18 +22,12 @@ command_list = [
     "ttt",
     "morpion",
     "connect4",
-    "rank",
-    "ranktop",
-    "reward",
-    "bank",
-    "banktop",
-    "autorole",
-    "shop",
+
     "purge",
     "mute",
     "unmute",
     "kick",
-    "ban"
+    "ban",
 ]
 
 cannot_disable = [

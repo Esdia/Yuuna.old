@@ -32,8 +32,24 @@ async def ping(infos):
 async def interpret(infos):
     command_list = {
         "ping": ping,
+        "help": help_module.interpret,
+        "autorole": autorole.interpret,
+
         "prefix": conf.prefix,
         "language": conf.language,
+        "enable": disable_commands.enable,
+        "disable": disable_commands.disable,
+        "master": conf.bot_master,
+        "confirm": conf.confirm,
+
+        "rank": levels.interpret,
+        "ranktop": levels.ranktop,
+        "reward": levels.rewards_interpret,
+
+        "bank": bank.interpret,
+        "banktop": bank.banktop,
+        "shop": shop.interpret,
+
         "blackjack": black_jack.create,
         "bj": black_jack.create,
         "chess": chess.start,
@@ -41,23 +57,12 @@ async def interpret(infos):
         "ttt": tic_tac_toe.entry,
         "morpion": tic_tac_toe.entry,
         "connect4": connect4.start,
-        "rank": levels.interpret,
-        "ranktop": levels.ranktop,
-        "reward": levels.rewards_interpret,
-        "bank": bank.interpret,
-        "banktop": bank.banktop,
-        "autorole": autorole.interpret,
-        "shop": shop.interpret,
-        "help": help_module.interpret,
+
         "purge": moderation.purge,
         "mute": moderation.mute,
         "unmute": moderation.unmute,
         "kick": moderation.kick,
-        "ban": moderation.ban,
-        "enable": disable_commands.enable,
-        "disable": disable_commands.disable,
-        "master": conf.bot_master,
-        "confirm": conf.confirm
+        "ban": moderation.ban
     }
 
     msg = infos.message.content.split()

@@ -246,7 +246,7 @@
   "help.page.8.title": "Help - Yuuna : About",
   "help.page.8.description": "",
   "help.page.8.field_name_1": "About the bot",
-  "help.page.8.field_value_1": "Yuuna is a multipurpose discord bot coded in Python by Esdia using Rapptz's discord API python wrapper.\nIf you meet a bug or have a suggestion, please contact Esdia and give him all needed information with the contact infos given bellow.",
+  "help.page.8.field_value_1": "Yuuna is a multipurpose discord bot coded in Python by Esdia using Rapptz's discord API python wrapper.\nIf you meet a bug or have a suggestion, please contact Esdia and give him all needed information with the contact infos given bellow.\nYuuna comes with a website : https://www.yuuna-website.herokuapp.com/ , where you can find more detailed explanations about Yuuna's features, and where you can configure the bot.",
   "help.page.8.field_name_2": "The developer's contact infos",
   "help.page.8.field_value_2": "Discord : Esdia#0313\nGithub : https://github.com/Esdia",
   "help.page.8.field_name_3": "Yuuna's source code",

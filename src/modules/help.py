@@ -25,33 +25,33 @@ async def interpret(infos):
                 For example if you type `y!help games` we want to print the general
                 help, but starting from the 6th page
             """
-            first_dict = {
-                "conf": 1,
-                "config": 1,
-                "configuration": 1,
+            modules_dict = {
+                "misc": 1,
+                "miscellaneous": 1,
+                "divers": 1,  # French for miscellaneous
 
-                "XP": 2,
-                "level": 2,
-                "rank": 2,
+                "conf": 2,
+                "config": 2,
+                "configuration": 2,
 
-                "bank": 3,
-                "coins": 3,
+                "xp": 3,
+                "level": 3,
 
-                "autorole": 4,
-                "automatics": 4,
+                "bank": 4,
+                "shop": 4,
 
                 "games": 5,
-                "jeux": 5,  # french for "games"
+                "jeux": 5,  # French for games
 
-                "moderation": 6,
                 "mod": 6,
+                "moderation": 6,
 
                 "about": 7,
                 "contact": 7
             }
 
-            if msg[1] in first_dict:
-                await help_general(infos, first=first_dict[msg[1]])
+            if msg[1].lower() in modules_dict:
+                await help_general(infos, first=modules_dict[msg[1]])
             else:
                 await infos.client.send_message(
                     infos.message.channel,
@@ -59,8 +59,8 @@ async def interpret(infos):
                 )
 
 
-# Given the number of fields for each page, this function creates a list of embed messages, one for each page
-def format_embed(nb_fields, text_data, prefix, game=None):
+# This function creates a list of embed messages, one for each page
+def format_embed(text_data, prefix, game=None):
     list_pages = []
     if game is None:
         title_key = "help.page.{}.{}"
@@ -74,20 +74,27 @@ def format_embed(nb_fields, text_data, prefix, game=None):
             game,
             "{}"
         )
-    for i in range(len(nb_fields)):
-        page = Embed(title=text_data[title_key.format(i+1, "title")],
+
+    nb_pages = 0
+    while title_key.format(nb_pages+1, "title") in text_data:
+        nb_pages += 1
+
+    i = 1
+    while title_key.format(i, "title") in text_data:
+        page = Embed(title=text_data[title_key.format(i, "title")],
                      description=text_data[
                          title_key.format(
-                             i+1,
+                             i,
                              "description"
                          )
                      ].format(prefix),
                      color=0xD828D0)
-        fields = nb_fields[i]
-        for k in range(1, fields+1):
+
+        k = 1
+        while key.format(i, "value", k) in text_data:
             value = text_data[
                 key.format(
-                    i+1,
+                    i,
                     "value",
                     k
                 )
@@ -96,25 +103,27 @@ def format_embed(nb_fields, text_data, prefix, game=None):
             for s in range(len(value)-1):
                 if value[s:s+2] == "{}":
                     formats += 1
-            format_tup = (prefix,)
-            for _ in range(formats-1):
-                format_tup += format_tup
+            format_tup = ()
+            for _ in range(formats):
+                format_tup += (prefix,)
 
-            page.add_field(name=text_data[key.format(i+1, "name", k)],
-                           value=value.format(*format_tup),
+            page.add_field(name=text_data[key.format(i, "name", k)],
+                           value=value.format(*format_tup, player="{player}", level="{level}"),
                            inline=False)
+
+            k += 1
+
         page.set_footer(text=text_data["embed.footer"].format(
-            i+1,
-            len(nb_fields)
+            i,
+            nb_pages
         ))
         list_pages.append(page)
+        i += 1
     return list_pages
 
 
 async def help_general(infos, first=0):
-    nb_fields = [2, 3, 2, 2, 2, 4, 4, 3]
     list_pages = format_embed(
-        nb_fields,
         infos.text_data,
         infos.prefix
     )
@@ -133,9 +142,7 @@ async def help_general(infos, first=0):
 
 
 async def help_tic_tac_toe(infos):
-    nb_fields = [2]
     list_pages = format_embed(
-        nb_fields,
         infos.text_data,
         infos.prefix,
         game="tic-tac-toe"
@@ -147,9 +154,7 @@ async def help_tic_tac_toe(infos):
 
 
 async def help_connect4(infos):
-    nb_fields = [2]
     list_pages = format_embed(
-        nb_fields,
         infos.text_data,
         infos.prefix,
         game="connect4"
@@ -161,9 +166,7 @@ async def help_connect4(infos):
 
 
 async def help_blackjack(infos):
-    nb_fields = [3]
     list_pages = format_embed(
-        nb_fields,
         infos.text_data,
         infos.prefix,
         game="blackjack"
@@ -175,9 +178,7 @@ async def help_blackjack(infos):
 
 
 async def help_chess(infos):
-    nb_fields = [2, 6, 2, 2]
     list_pages = format_embed(
-        nb_fields,
         infos.text_data,
         infos.prefix,
         game="chess"

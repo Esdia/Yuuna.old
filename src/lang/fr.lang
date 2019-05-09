@@ -189,7 +189,7 @@
 
 
   "help.page.3.title": "Aide - Yuuna : La configuration du bot",
-  "help.page.3.description": "Vous avez besoin de la permission `gérer le serveur` pour utiliser les commandes suivantes.",
+  "help.page.3.description": "Vous avez besoin de la permission `gérer le serveur` pour utiliser les commandes suivantes. Toutes les fonctionnalités pouvant être configurées (que ce soit dans ce modules ou un autre) peuvent être configurées depuis le site web : https://www.yuuna-website.herokuapp.com",
   "help.page.3.field_name_1": "Le préfixe",
   "help.page.3.field_value_1": "Le préfixe par défaut est `y!`, donc une commande correcte serait `y!help`.\nVous pouvez changer le préfixe n'importe quand. Supposons que vous utilisiez toujours le préfixe par défaut, vous pouvez en changer comme ceci:\n`y!prefix [nouveau préfixe]`.\nVous pouvez utiliser `y!prefix` avec le préfixe par défaut pour voir quel préfixe est actuellement configuré.",
   "help.page.3.field_name_2": "La langue",

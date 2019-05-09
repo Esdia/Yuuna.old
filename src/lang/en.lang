@@ -189,7 +189,7 @@
 
 
   "help.page.3.title": "Help - Yuuna : The bot configuration",
-  "help.page.3.description": "You need the `manage server` permission to use any of the following commands",
+  "help.page.3.description": "You need the `manage server` permission to use any of the following commands. Every feature that can be configured (either in this module or in other modules) can be configured from the website : https://www.yuuna-website.herokuapp.com",
   "help.page.3.field_name_1": "The prefix",
   "help.page.3.field_value_1": "The default prefix is `y!`, so a correct command would be `y!help`.\nYou can change the prefix anytime. Let's say you're still using the default prefix, you can change like that:\n`y!prefix [new prefix]`.\nYou can use `y!prefix` (with the default prefix) to see what prefix you're using.",
   "help.page.3.field_name_2": "The language",

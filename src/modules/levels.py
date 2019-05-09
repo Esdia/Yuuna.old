@@ -311,6 +311,25 @@ async def reset_message(infos):
     )
 
 
+async def set_message_private(infos):
+    await infos.storage.set(
+        "levels:message:private",
+        "1"
+    )
+    await infos.client.send_message(
+        infos.message.channel,
+        infos.text_data["levels.message.private"]
+    )
+
+
+async def set_message_nonprivate(infos):
+    await infos.storage.delete("levels:message:private")
+    await infos.client.send_message(
+        infos.message.channel,
+        infos.text_data["levels.message.nonprivate"]
+    )
+
+
 # Called when we have a command that starts exactly by "y!rank". ranktop is not included
 async def interpret(infos):
     msg = infos.message.content.split()
@@ -351,6 +370,12 @@ async def interpret(infos):
                         return
                     elif msg[2] == "reset":
                         await reset_message(infos)
+                        return
+                    elif msg[2] == "private":
+                        await set_message_private(infos)
+                        return
+                    elif msg[2] == "nonprivate":
+                        await set_message_nonprivate(infos)
                         return
                 elif len(msg) > 2:
                     await set_message(infos, msg[2:])
@@ -694,8 +719,17 @@ async def give_xp(infos):
             message = await infos.storage.get("levels:message")
             message = infos.text_data["levels.level_up"] if message is None else str(message)
 
+            private = await infos.storage.get("levels:message:private")
+            if private:
+                dest = infos.message.author
+                message += " ({})".format(
+                    infos.message.server.name
+                )
+            else:
+                dest = infos.message.channel
+
             await infos.client.send_message(
-                infos.message.channel,
+                dest,
                 message.format(
                     player=author.mention,
                     level=new_level

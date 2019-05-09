@@ -272,6 +272,8 @@
   "levels.message.enabled": "Le message de montée de niveau est maintenant activé.",
   "levels.message.set": "Le message de montée de niveau a été changé.",
   "levels.message.reset": "Le message de montée de niveau a été réinitialisé.",
+  "levels.message.private": "Le message de montée de niveau vous sera envoyé en message privé",
+  "levels.message.nonprivate": "Le message de montée de niveau vous sera envoyé dans le salon courant.",
   "levels.level_up": "{player}, vous êtes maintenant niveau {level}.",
   "levels.no_rewards": "Il n'y a pas de récompense configurée pour l'instant.",
   "levels.banned.list": "Liste des rôles et des salons bannis",

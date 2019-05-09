@@ -272,6 +272,8 @@
   "levels.message.enabled": "The level-up message is now enabled.",
   "levels.message.set": "The level-up message has been changed.",
   "levels.message.reset": "The level-up message has been reset.",
+  "levels.message.private": "The level-up message will now be sent in private.",
+  "levels.message.nonprivate": "The level-up message will be sent in the current channel.",
   "levels.level_up": "{player}, you leveled up, you are now level {level}.",
   "levels.no_rewards": "There seems to have no rewards set for now.",
   "levels.banned.list": "Banned roles and channels list",

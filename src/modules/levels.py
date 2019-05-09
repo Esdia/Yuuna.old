@@ -130,7 +130,7 @@ async def rank_command(infos, members=None):
 # Ban some channels from the ranking system
 # At this point, and for the next 3 functions too, we know that
 # the author is allowed to do whatever they are trying to
-async def ban(infos, channels):
+async def ban(infos, channels, roles):
     for c in channels:
         await infos.storage.sadd(
             "levels:banned_channels",
@@ -138,14 +138,25 @@ async def ban(infos, channels):
         )
         await infos.client.send_message(
             infos.message.channel,
-            infos.text_data["levels.ban"].format(
+            infos.text_data["levels.ban_channel"].format(
                 c.mention
+            )
+        )
+    for r in roles:
+        await infos.storage.sadd(
+            "levels:banned_roles",
+            r.id
+        )
+        await infos.client.send_message(
+            infos.message.channel,
+            infos.text_data["levels.ban_role"].format(
+                r.mention
             )
         )
 
 
 # Unban some channels from the levelling system
-async def unban(infos, channels):
+async def unban(infos, channels, roles):
     for c in channels:
         await infos.storage.srem(
             "levels:banned_channels",
@@ -153,27 +164,52 @@ async def unban(infos, channels):
         )
         await infos.client.send_message(
             infos.message.channel,
-            infos.text_data["levels.unban"].format(
+            infos.text_data["levels.unban_channel"].format(
                 c.mention
+            )
+        )
+    for r in roles:
+        await infos.storage.srem(
+            "levels:banned_roles",
+            r.id
+        )
+        await infos.client.send_message(
+            infos.message.channel,
+            infos.text_data["levels.unban_role"].format(
+                r.mention
             )
         )
 
 
 async def ban_list(infos):
     channels = await infos.storage.smembers('levels:banned_channels')
-    printable = ""
+    roles = await infos.storage.smembers('levels:banned_roles')
+    printable_channels = ""
+    printable_roles = ""
 
     for channel_id in channels:
         channel = utils.get(
             infos.message.server.channels,
             id=channel_id
         )
-        printable += "{}\n".format(
-            channel.mention
+        if channel is not None:
+            printable_channels += "{}\n".format(
+                channel.mention
+            )
+    for role_id in roles:
+        role = utils.get(
+            infos.message.server.roles,
+            id=role_id
         )
+        if role is not None:
+            printable_roles += "{}\n".format(
+                role.mention
+            )
 
-    if printable == "":
-        printable = infos.text_data["levels.no_banned"]
+    if printable_channels == "":
+        printable_channels = infos.text_data["levels.no_banned_channel"]
+    if printable_roles == "":
+        printable_roles = infos.text_data["levels.no_banned_role"]
 
     embed = Embed(
         title=infos.text_data["levels.banned.list"],
@@ -182,7 +218,12 @@ async def ban_list(infos):
     )
     embed.add_field(
         name=infos.text_data["levels.channels"],
-        value=printable,
+        value=printable_channels,
+        inline=False
+    )
+    embed.add_field(
+        name=infos.text_data["levels.roles"],
+        value=printable_roles,
         inline=False
     )
 
@@ -280,7 +321,8 @@ async def interpret(infos):
 
             if msg[1] in ["ban", "unban"]:
                 channels = infos.message.channel_mentions
-                if not channels:
+                roles = infos.message.role_mentions
+                if not (channels or roles):
                     if msg[1] == "ban":
                         await ban_list(infos)
                     else:
@@ -289,9 +331,9 @@ async def interpret(infos):
                             infos.text_data["info.error.syntax"]
                         )
                 elif msg[1] == "ban":
-                    await ban(infos, channels)
+                    await ban(infos, channels, roles)
                 else:
-                    await unban(infos, channels)
+                    await unban(infos, channels, roles)
 
             elif msg[1] == "reset":
                 if await confirm(infos):
@@ -588,8 +630,13 @@ async def give_xp(infos):
             "levels:banned_channels"
         )
     )
+    banned_roles = list(
+        await infos.storage.smembers(
+            "levels:banned_roles"
+        )
+    )
 
-    if (not is_enabled) or (infos.message.channel.id in banned_channels):
+    if (not is_enabled) or (infos.message.channel.id in banned_channels) or any(r.id in banned_roles for r in infos.message.author.roles):
         return
 
     # We add the member in the database

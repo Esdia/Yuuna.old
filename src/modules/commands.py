@@ -62,7 +62,7 @@ async def interpret(infos):
         "mute": moderation.mute,
         "unmute": moderation.unmute,
         "kick": moderation.kick,
-        "ban": moderation.ban
+        "ban": moderation.ban,
     }
 
     msg = infos.message.content.split()
@@ -87,3 +87,4 @@ async def interpret(infos):
         return True
 
     return False
+

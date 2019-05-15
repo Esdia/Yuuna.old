@@ -1,4 +1,5 @@
 import json
+import asyncio
 
 
 class Infos:
@@ -53,3 +54,45 @@ async def init(client, message, database, is_heroku):
     infos.text_data = await infos.get_language(is_heroku)
 
     return infos
+
+
+async def push_commands(database):
+    command_list = [
+        "ping",
+        "autorole",
+
+        "master",
+        "confirm"
+
+        "rank",
+        "ranktop",
+        "reward",
+
+        "bank",
+        "banktop",
+        "shop",
+
+        "blackjack",
+        "bj",
+        "chess",
+        "tic-tac-toe",
+        "ttt",
+        "morpion",
+        "connect4",
+
+        "purge",
+        "mute",
+        "unmute",
+        "kick",
+        "ban",
+    ]
+
+    await database.connect()
+    await asyncio.sleep(2)
+
+    for c in command_list:
+        await database.redis.sadd(
+            "commands",
+            c
+        )
+        print('Pushed command : ' + c)

@@ -41,13 +41,19 @@ async def refresh_redis():
 
 @client.event
 async def on_ready():
+    global database
     await client.change_presence(game=discord.Game(name="y!help"))
 
     client.loop.create_task(
         refresh_redis()
     )
 
-    print('Discord API version :', discord.__version__)
+    redis_url = get_redis_url()
+    database = Database(redis_url)
+
+    await information.push_commands(database)
+
+    print('\nDiscord API version :', discord.__version__)
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)

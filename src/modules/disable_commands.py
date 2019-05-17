@@ -156,7 +156,7 @@ async def disable(infos):
             )
             return
 
-    await infos.storage.srem(
+    await infos.storage.sadd(
         "disabled_commands",
         command
     )

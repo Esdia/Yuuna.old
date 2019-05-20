@@ -44,7 +44,7 @@ async def interpret(infos):
 
         "rank": levels.interpret,
         "ranktop": levels.ranktop,
-        "reward": levels.rewards_interpret,
+        "rewards": levels.rewards_list,
 
         "bank": bank.interpret,
         "banktop": bank.banktop,

@@ -520,28 +520,29 @@ async def ranktop(infos):
         )
 
 
-async def get_rewards(infos):
+async def rewards_list(infos):
     rewards = await infos.storage.smembers('levels:rewards')
     if rewards is None:
         rewards = []
     printable = ""
 
     for level in rewards:
-        role_id = await infos.storage.get(
+        role_id = await infos.storage.smembers(
             "levels:reward:{}".format(
                 level
             )
         )
-        role = utils.get(
-            infos.message.server.roles,
-            id=role_id
-        )
-        if role is not None:
-            printable += "{} {} : {}\n".format(
-                infos.text_data["levels.level"],
-                level,
-                role.mention
+        for _id in role_id:
+            role = utils.get(
+                infos.message.server.roles,
+                id=_id
             )
+            if role is not None:
+                printable += "{} {} : {}\n".format(
+                    infos.text_data["levels.level"],
+                    level,
+                    role.mention
+                )
 
     if printable == "":
         printable = infos.text_data["levels.no_rewards"]
@@ -561,86 +562,6 @@ async def get_rewards(infos):
         infos.message.channel,
         embed=embed
     )
-
-
-async def set_reward(infos, role, level):
-    await infos.storage.sadd(
-        "levels:rewards",
-        level
-    )
-    await infos.storage.set(
-        "levels:reward:{}".format(
-            level
-        ),
-        role.id
-    )
-    await infos.client.send_message(
-        infos.message.channel,
-        infos.text_data["levels.reward.set"].format(
-            role.mention,
-            level
-        )
-    )
-
-
-async def del_reward(infos, level):
-    await infos.storage.srem(
-        "levels:rewards",
-        level
-    )
-    await infos.storage.delete(
-        "levels:reward:{}".format(
-            level
-        )
-    )
-    await infos.client.send_message(
-        infos.message.channel,
-        infos.text_data["levels.reward.del"].format(
-            level
-        )
-    )
-
-
-async def rewards_interpret(infos):
-    msg = infos.message.content.split()
-
-    if not await allowed(infos, "manage_server"):
-        return
-
-    if len(msg) == 1:
-        await infos.client.send_message(
-            infos.message.channel,
-            infos.text_data["info.error.syntax"]
-        )
-    else:
-        if msg[1] == "list":
-            await get_rewards(infos)
-            return
-        elif msg[1] in ["set", "delete"]:
-            n_str = [
-                s for s in msg if s.isdigit()
-            ]
-            if n_str:
-                n = int(
-                    n_str[0]
-                )
-                if msg[1] == "set":
-                    mentions = infos.message.role_mentions
-                    if mentions:
-                        role = mentions[0]
-                        await set_reward(infos, role, n)
-                        return
-                    else:
-                        pass
-                else:
-                    await del_reward(infos, n)
-                    return
-            else:
-                pass
-        await infos.client.send_message(
-            infos.message.channel,
-            infos.text_data["info.error.syntax"]
-        )
 
 
 # Called when someone speaks, to give them xp
@@ -746,18 +667,19 @@ async def give_xp(infos):
             level_up=True
         )
 
-        reward_id = await infos.storage.get(
+        reward_id = await infos.storage.smembers(
             "levels:reward:{}".format(
                 new_level
             )
         )
         if reward_id is not None:
-            reward = utils.get(
-                infos.message.server.roles,
-                id=reward_id
-            )
-            if reward is not None:
-                await infos.client.add_roles(
-                    author,
-                    reward
+            for _id in reward_id:
+                reward = utils.get(
+                    infos.message.server.roles,
+                    id=_id
                 )
+                if reward is not None:
+                    await infos.client.add_roles(
+                        author,
+                        reward
+                    )

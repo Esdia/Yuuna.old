@@ -62,11 +62,11 @@ async def push_commands(database):
         "autorole",
 
         "master",
-        "confirm"
+        "confirm",
 
         "rank",
         "ranktop",
-        "reward",
+        "rewards",
 
         "bank",
         "banktop",
@@ -89,6 +89,8 @@ async def push_commands(database):
 
     await database.connect()
     await asyncio.sleep(2)
+
+    await database.redis.delete("commands")
 
     for c in command_list:
         await database.redis.sadd(

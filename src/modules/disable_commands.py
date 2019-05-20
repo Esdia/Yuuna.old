@@ -9,7 +9,7 @@ command_list = [
 
     "rank",
     "ranktop",
-    "reward",
+    "rewards",
 
     "bank",
     "banktop",

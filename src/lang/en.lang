@@ -248,9 +248,9 @@
   "help.page.8.field_name_1": "About the bot",
   "help.page.8.field_value_1": "Yuuna is a multipurpose discord bot coded in Python by Esdia using Rapptz's discord API python wrapper.\nIf you meet a bug or have a suggestion, please contact Esdia and give him all needed information with the contact infos given bellow.\nYuuna comes with a website : https://yuuna-website.herokuapp.com/ , where you can find more detailed explanations about Yuuna's features, and where you can configure the bot.",
   "help.page.8.field_name_2": "The developer's contact infos",
-  "help.page.8.field_value_2": "Discord : Esdia#0313\nGithub : https://github.com/Esdia",
+  "help.page.8.field_value_2": "Discord : Esdia#0313\nGithub : https://github.com/Esdia\nYou can find a link to the support server on the website's home page",
   "help.page.8.field_name_3": "Yuuna's source code",
-  "help.page.8.field_value_3": "Yuuna's code is fully open source, feel free to check the code on github : https://github.com/Esdia/Yuuna",
+  "help.page.8.field_value_3": "Yuuna's code is fully open source, feel free to check the code on github : https://github.com/Esdia/Yuuna\nSource code of the website : https://github.com/Esdia/YuunaWebsite",
 
   "ignore_confirm.disable": "I will ask for a confirmation when you use some commands.",
   "ignore_confirm.enable": "I will no longer ask for a confirmation when you use a command.",

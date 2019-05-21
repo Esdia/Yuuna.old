@@ -189,7 +189,7 @@
 
 
   "help.page.3.title": "Help - Yuuna : The bot configuration",
-  "help.page.3.description": "You need the `manage server` permission to use any of the following commands. Every feature that can be configured (either in this module or in other modules) can be configured from the website : https://www.yuuna-website.herokuapp.com",
+  "help.page.3.description": "You need the `manage server` permission to use any of the following commands. Every feature that can be configured (either in this module or in other modules) can be configured from the website : https://yuuna-website.herokuapp.com",
   "help.page.3.field_name_1": "The prefix",
   "help.page.3.field_value_1": "The default prefix is `y!`, so a correct command would be `y!help`.\nYou can change the prefix anytime. Let's say you're still using the default prefix, you can change like that:\n`y!prefix [new prefix]`.\nYou can use `y!prefix` (with the default prefix) to see what prefix you're using.",
   "help.page.3.field_name_2": "The language",
@@ -209,7 +209,7 @@
   "help.page.4.field_name_2": "The configuration (2/2)",
   "help.page.4.field_value_2": "You can use `{}rank reset @members` to reset the level of the mentioned members. Warning : If you mention nobody, the levels of the whole server will be reset.\n You can use `{}rank message [0-1]` to disable or enable the level-up message (enabled by default).\n You can use `{}rank message [message]` to change the level-up message. Include {player} in the message to ping the member, and {level} to print the level. Use `{}rank message reset` to use the default message.\nYou can use `{}rank message private` to tell Yuuna to send the level-up message in private, or `{}rank message nonprivate` to make Yuuna send the message in the current channel.\nYou can use `{}rank antispam [delay in seconds]` to change the antispam delay (by default 60 seconds). If you set it to zero, the antispam will be disabled.",
   "help.page.4.field_name_3": "The level rewards",
-  "help.page.4.field_value_3": "You can set roles to be automatically given to members when they reach a certain xp level.\nTo do that, please go to this page : https://www.yuuna-website.herokuapps.com/dashboard.\nUse `{}rewards` to get a list of the configured role rewards.\nYou can use `{}rank bankreward [reward]` to change the number of Coins you will earn by levelling up.",
+  "help.page.4.field_value_3": "You can set roles to be automatically given to members when they reach a certain xp level.\nTo do that, please go to this page : https://yuuna-website.herokuapps.com/dashboard.\nUse `{}rewards` to get a list of the configured role rewards.\nYou can use `{}rank bankreward [reward]` to change the number of Coins you will earn by levelling up.",
   "help.page.4.field_name_4": "The commands",
   "help.page.4.field_value_4": "You can use `{}rank` to see your information : xp, level, rank.\nYou can also mention other members to get their information : `{}rank @member`.\nYou can use `{}ranktop` to get a leaderboard of the levels.",
 
@@ -246,7 +246,7 @@
   "help.page.8.title": "Help - Yuuna : About",
   "help.page.8.description": "",
   "help.page.8.field_name_1": "About the bot",
-  "help.page.8.field_value_1": "Yuuna is a multipurpose discord bot coded in Python by Esdia using Rapptz's discord API python wrapper.\nIf you meet a bug or have a suggestion, please contact Esdia and give him all needed information with the contact infos given bellow.\nYuuna comes with a website : https://www.yuuna-website.herokuapp.com/ , where you can find more detailed explanations about Yuuna's features, and where you can configure the bot.",
+  "help.page.8.field_value_1": "Yuuna is a multipurpose discord bot coded in Python by Esdia using Rapptz's discord API python wrapper.\nIf you meet a bug or have a suggestion, please contact Esdia and give him all needed information with the contact infos given bellow.\nYuuna comes with a website : https://yuuna-website.herokuapp.com/ , where you can find more detailed explanations about Yuuna's features, and where you can configure the bot.",
   "help.page.8.field_name_2": "The developer's contact infos",
   "help.page.8.field_value_2": "Discord : Esdia#0313\nGithub : https://github.com/Esdia",
   "help.page.8.field_name_3": "Yuuna's source code",

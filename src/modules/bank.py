@@ -271,7 +271,7 @@ async def interpret(infos):
     msg = infos.message.content.split()
     if len(msg) > 1:
         if msg[1] in ["add", "remove", "set"]:
-            if not await allowed(infos, "manage_message"):
+            if not await allowed(infos, "manage_messages"):
                 return
 
             numbers = [i for i in msg if i.isdigit()]

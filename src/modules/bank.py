@@ -41,8 +41,8 @@ async def bank_add(infos, member, n, level_up=False):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["bank.add"].format(
-                member.mention,
-                n
+                member=member.mention,
+                n=n
             )
         )
 
@@ -79,8 +79,8 @@ async def bank_remove(infos, member, n, shop=False):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["bank.remove"].format(
-                member.mention,
-                coins - new_coins
+                member=member.mention,
+                n=(coins - new_coins)
             )
         )
 
@@ -110,8 +110,8 @@ async def bank_set(infos, member, n):
     await infos.client.send_message(
         infos.message.channel,
         infos.text_data["bank.set"].format(
-            member.mention,
-            n
+            member=member.mention,
+            n=n
         )
     )
 
@@ -248,8 +248,8 @@ async def banktop(infos):
     for i in range(len(list_pages)):
         list_pages[i].set_footer(
             text=infos.text_data["embed.footer"].format(
-                i + 1,
-                len(list_pages)
+                current=(i + 1),
+                total=len(list_pages)
             )
         )
 

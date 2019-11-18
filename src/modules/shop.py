@@ -60,8 +60,8 @@ async def buy(infos, role):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["shop.buy"].format(
-                    infos.message.author.mention,
-                    role.name
+                    member=infos.message.author.mention,
+                    role=role.name
                 )
             )
         else:
@@ -280,8 +280,8 @@ async def display_shop(infos):
     for i in range(len(list_pages)):
         list_pages[i].set_footer(
             text=infos.text_data["embed.footer"].format(
-                i + 1,
-                len(list_pages)
+                current=(i + 1),
+                total=len(list_pages)
             )
         )
 
@@ -319,8 +319,8 @@ async def shop_add(infos, role, price):
     await infos.client.send_message(
         infos.message.channel,
         infos.text_data["shop.role.added"].format(
-            role.mention,
-            price
+            role=role.mention,
+            n=price
         )
     )
 
@@ -338,7 +338,7 @@ async def shop_remove(infos, role):
     await infos.client.send_message(
         infos.message.channel,
         infos.text_data["shop.role.removed"].format(
-            role.mention,
+            role=role.mention,
         )
     )
 
@@ -353,7 +353,7 @@ async def shop_set(infos, role, price):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["shop.set.error"].format(
-                role.mention
+                role=role.mention
             )
         )
     else:
@@ -366,8 +366,8 @@ async def shop_set(infos, role, price):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["shop.set.success"].format(
-                role.mention,
-                price
+                role=role.mention,
+                n=price
             )
         )
 

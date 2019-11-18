@@ -87,7 +87,7 @@ def format_embed(text_data, prefix, game=None):
                              i,
                              "description"
                          )
-                     ].format(prefix),
+                     ].format(prefix=prefix),
                      color=0xD828D0)
 
         k = 1
@@ -99,23 +99,16 @@ def format_embed(text_data, prefix, game=None):
                     k
                 )
             ]
-            formats = 0
-            for s in range(len(value)-1):
-                if value[s:s+2] == "{}":
-                    formats += 1
-            format_tup = ()
-            for _ in range(formats):
-                format_tup += (prefix,)
 
             page.add_field(name=text_data[key.format(i, "name", k)],
-                           value=value.format(*format_tup, player="{player}", level="{level}"),
+                           value=value.format(prefix=prefix, player="{player}", level="{level}"),
                            inline=False)
 
             k += 1
 
         page.set_footer(text=text_data["embed.footer"].format(
-            i,
-            nb_pages
+            current=i,
+            total=nb_pages
         ))
         list_pages.append(page)
         i += 1

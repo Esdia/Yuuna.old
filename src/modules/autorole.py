@@ -53,7 +53,7 @@ async def set_autorole(infos, role):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["autorole.set"].format(
-                role.name
+                role=role.name
             )
         )
 

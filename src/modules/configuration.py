@@ -10,7 +10,7 @@ async def prefix(infos):
     if len(msg) == 1:
         await infos.client.send_message(
             infos.message.channel,
-            infos.text_data["config.prefix.get"].format(infos.prefix)
+            infos.text_data["config.prefix.get"].format(prefix=infos.prefix)
         )
 
     # The user should not be mentioning anything
@@ -31,7 +31,7 @@ async def prefix(infos):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["config.prefix.set"].format(
-                msg[1]
+                prefix=msg[1]
             )
         )
 
@@ -62,7 +62,7 @@ async def language(infos):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["config.language.set"].format(
-                    infos.text_data[
+                    language=infos.text_data[
                         "language.{}".format(msg[1])
                     ]
                 )
@@ -109,7 +109,7 @@ async def bot_master(infos):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["bot_master.role"].format(
-                    master.mention
+                    role=master.mention
                 )
             )
     elif msg[1] in ['set', 'delete']:
@@ -139,7 +139,7 @@ async def bot_master(infos):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["bot_master.set"].format(
-                    master.mention
+                    role=master.mention
                 )
             )
     else:

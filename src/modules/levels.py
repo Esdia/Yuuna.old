@@ -86,7 +86,7 @@ async def rank_command(infos, members=None):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["levels.error.not_ranked"].format(
-                    m.mention
+                    member=m.mention
                 )
             )
         else:
@@ -139,7 +139,7 @@ async def ban(infos, channels, roles):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["levels.ban_channel"].format(
-                c.mention
+                channel=c.mention
             )
         )
     for r in roles:
@@ -150,7 +150,7 @@ async def ban(infos, channels, roles):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["levels.ban_role"].format(
-                r.mention
+                role=r.mention
             )
         )
 
@@ -165,7 +165,7 @@ async def unban(infos, channels, roles):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["levels.unban_channel"].format(
-                c.mention
+                channel=c.mention
             )
         )
     for r in roles:
@@ -176,7 +176,7 @@ async def unban(infos, channels, roles):
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["levels.unban_role"].format(
-                r.mention
+                role=r.mention
             )
         )
 
@@ -407,7 +407,7 @@ async def interpret(infos):
                     else:
                         await infos.client.send_message(
                             infos.message.channel,
-                            infos.text_data["levels.antispam"].format(delay)
+                            infos.text_data["levels.antispam"].format(n=delay)
                         )
 
             elif msg[1] == "bankreward":
@@ -421,7 +421,7 @@ async def interpret(infos):
                     await infos.storage.set("levels:bank_reward", reward)
                     await infos.client.send_message(
                         infos.message.channel,
-                        infos.text_data["levels.bank_reward.set"].format(reward)
+                        infos.text_data["levels.bank_reward.set"].format(n=reward)
                     )
 
             else:
@@ -495,14 +495,14 @@ async def ranktop(infos):
                 color=0xD828D0
             )
 
-    if (i + 1) % 10 != 0:
+    if 0 != (i + 1) % 10:
         list_pages.append(embed)
 
     for i in range(len(list_pages)):
         list_pages[i].set_footer(
             text=infos.text_data["embed.footer"].format(
-                i+1,
-                len(list_pages)
+                current=(i+1),
+                total=len(list_pages)
             )
         )
 

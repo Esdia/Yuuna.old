@@ -132,14 +132,14 @@ async def end(infos, winner=None, stalemate=False, inactivity=False, forfeit=Fal
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["game.chess.inactivity.lost"].format(
-                winner.mention
+                member=winner.mention
             )
         )
     elif forfeit:
         await infos.client.send_message(
             infos.message.channel,
             infos.text_data["game.chess.forfeit"].format(
-                winner.mention
+                member=winner.mention
             )
         )
     elif winner is not None:
@@ -148,7 +148,7 @@ async def end(infos, winner=None, stalemate=False, inactivity=False, forfeit=Fal
             "{}\n{}".format(
                 infos.text_data["game.chess.checkmate"],
                 infos.text_data["game.winner"].format(
-                    winner.mention
+                    member=winner.mention
                 )
             )
         )
@@ -186,7 +186,7 @@ async def game(infos, game_infos):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["game.chess.warning"].format(
-                        game_infos.players[turn]
+                        member=game_infos.players[turn]
                     )
                 )
                 play = await infos.client.wait_for_message(
@@ -234,10 +234,10 @@ async def game(infos, game_infos):
             await infos.client.send_message(
                 infos.message.channel,
                 infos.text_data["game.chess.turn"].format(
-                    game_infos.players[
+                    member=game_infos.players[
                         turn
                     ].mention,
-                    colors[
+                    color=colors[
                         turn
                     ]
                 )

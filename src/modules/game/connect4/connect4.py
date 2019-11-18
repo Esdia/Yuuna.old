@@ -14,15 +14,15 @@ async def update_embed(infos, game_infos, inactivity=False, tie=False):
     embed.set_footer(text="")
     if inactivity:
         head = infos.text_data["game.connect4.inactivity.cancel"]
-        value = infos.text_data["game.winner"].format(game_infos.winner.mention)
+        value = infos.text_data["game.winner"].format(member=game_infos.winner.mention)
     elif game_infos.winner is not None:
-        head = infos.text_data["game.winner"].format(" ")
+        head = infos.text_data["game.winner"].format(member=" ")
         value = game_infos.winner.mention
     elif tie:
         head = infos.text_data["game.tie"]
         value = ":("
     else:
-        head = infos.text_data["game.player.turn"].format(" ")
+        head = infos.text_data["game.player.turn"].format(member=" ")
         value = game_infos.turn.mention
     embed.add_field(
         name=head,

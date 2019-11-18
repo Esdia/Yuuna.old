@@ -26,12 +26,12 @@ async def end(infos, players, message, embed):
         phrase = infos.text_data["game.no_winner"]
     elif len(win) == 1:
         phrase = infos.text_data["game.winner"].format(
-            win[0].mention
+            member=win[0].mention
         )
     else:
         win_mentions = [m.mention for m in win]
         phrase = infos.text_data["game.winners"].format(
-            ", ".join(win_mentions)
+            winner=(", ".join(win_mentions))
         )
 
     await infos.client.clear_reactions(message)
@@ -163,7 +163,7 @@ async def turn(infos, players, deck, message, embed, n):
                 if not p.turn_done:
                     await infos.client.send_message(
                         infos.message.channel,
-                        infos.text_data["game.blackjack.inactivity.kick"].format(p.user.mention)
+                        infos.text_data["game.blackjack.inactivity.kick"].format(member=p.user.mention)
                     )
                     p.in_game = False
                 p.turn_done = True

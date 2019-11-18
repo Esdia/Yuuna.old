@@ -86,7 +86,7 @@ async def mute(infos):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["moderation.mute.muted"].format(
-                        m.mention
+                        member=m.mention
                     )
                 )
 
@@ -126,7 +126,7 @@ async def unmute(infos):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["moderation.mute.unmuted"].format(
-                        m.mention
+                        member=m.mention
                     )
                 )
 
@@ -159,7 +159,7 @@ async def kick(infos):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["moderation.kick"].format(
-                        m.name
+                        member=m.name
                     )
                 )
 
@@ -192,6 +192,6 @@ async def ban(infos):
                 await infos.client.send_message(
                     infos.message.channel,
                     infos.text_data["moderation.ban"].format(
-                        m.name
+                        member=m.name
                     )
                 )

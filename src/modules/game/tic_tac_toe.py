@@ -50,9 +50,9 @@ async def end(infos, winner, message, inactivity=None):
     if winner == 'N':
         result = infos.text_data["game.tie"]
     elif winner == '❌':
-        result = infos.text_data["game.winner"].format(players[0].mention)
+        result = infos.text_data["game.winner"].format(member=players[0].mention)
     else:
-        result = infos.text_data["game.winner"].format(players[1].mention)
+        result = infos.text_data["game.winner"].format(member=players[1].mention)
     if inactivity is not None:
         result = "{} {}".format(
             inactivity,
@@ -113,7 +113,7 @@ async def game(infos, message_cases, message_turn, players, cases, reactions):
             await infos.client.edit_message(
                 message_turn,
                 new_content=infos.text_data["game.player.turn"].format(
-                    players[
+                    member=players[
                         1 - turn
                     ].mention
                 )
@@ -137,7 +137,7 @@ async def start(infos):
     players = player_dict[infos.message.channel.id]
 
     print_cases = get_printable(cases)
-    print_turn = infos.text_data["game.player.turn"].format(players[0].mention)
+    print_turn = infos.text_data["game.player.turn"].format(member=players[0].mention)
 
     message_case = await infos.client.send_message(
         infos.message.channel,

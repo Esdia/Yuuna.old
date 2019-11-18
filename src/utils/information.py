@@ -61,16 +61,11 @@ async def push_commands(database):
         "ping",
         "autorole",
 
-        "master",
-        "confirm",
+        "config",
 
-        "rank",
-        "ranktop",
-        "rewards",
+        "xp",
 
         "bank",
-        "banktop",
-        "shop",
 
         "blackjack",
         "bj",
@@ -86,7 +81,6 @@ async def push_commands(database):
         "kick",
         "ban",
     ]
-
     await database.connect()
     await asyncio.sleep(2)
 
@@ -97,4 +91,4 @@ async def push_commands(database):
             "commands",
             c
         )
-        print('Pushed command : ' + c)
+        print('Pushed command / module: ' + c)

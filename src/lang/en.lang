@@ -43,8 +43,10 @@
 
   "enable.cannot_disable": "You cannot disable this command.",
   "enable.disabled": "This command is now disabled.",
+  "enable.disabled_list": "Commands disabled :",
   "enable.enabled": "This command is now enabled.",
   "enable.not_found": "This command was not found.",
+  "enable.no_disabled": "There is no disabled command.",
 
   "game.creator": "Created by :",
   "game.tie": "The game is a draw.",
@@ -195,7 +197,7 @@
   "help.page.3.field_name_2": "The language",
   "help.page.3.field_value_2": "You can change the language of the bot by using the following command :\n`{prefix}language [language]`\nPlease use `en` for english, and `fr` for french.\nNote that only the text will be changed. The commands will always be the same, regardless of the language.",
   "help.page.3.field_name_3": "Disable commands",
-  "help.page.3.field_value_3": "You can disable every 'module' of the bot by using the command `{prefix}disable [command]`. You can enable them back by using `{prefix}enable [command]`. For example, if you use `{prefix}disable chess`, it will become impossible to play chess on your server. Please keep in mind that you cannot disable sub-commands of a module, for example you cannot disable `{prefix}bank pay` without disabling the others bank commands.\n Note that you cannot disable those commands : `{prefix}help`, `{prefix}prefix`, `{prefix}language`, `{prefix}enable` and `{prefix}disable`.",
+  "help.page.3.field_value_3": "You can disable every 'module' of the bot by using the command `{prefix}disable [command]`. You can enable them back by using `{prefix}enable [command]`. For example, if you use `{prefix}disable chess`, it will become impossible to play chess on your server. Please keep in mind that you cannot disable sub-commands of a module, for example you cannot disable `{prefix}bank pay` without disabling the others bank commands.\n Note that you cannot disable those commands : `{prefix}help`, `{prefix}prefix`, `{prefix}language`, `{prefix}enable` and `{prefix}disable`.\nYou can use the command `{prefix}disable list` to get a list of all the disabled commands.",
   "help.page.3.field_name_4": "The bot master's role",
   "help.page.3.field_value_4": "By default, only those with the needed permissions can use a command (for example, you need the 'manage server' to use any command on this page), but you can set a role to be the 'bot master', it means that any person with this role can bypass the permission checking (except for the moderation commands). The command is `{prefix}master set @role`. You can delete the bot master by using `{prefix}master delete`",
   "help.page.3.field_name_5": "Command's confirmation",

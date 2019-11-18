@@ -43,8 +43,10 @@
 
   "enable.cannot_disable": "You cannot disable this command.",
   "enable.disabled": "Cette commande a été désactivée.",
+  "enable.disabled_list": "Commandes désactivées :",
   "enable.enabled": "Cette commande a été activée.",
   "enable.not_found": "Cette commande n'a pas été trouvée.",
+  "enable.no_disabled": "Il n'y a pas de commandes désactivées.",
 
   "game.creator": "Créé par :",
   "game.tie": "Égalité.",
@@ -195,7 +197,7 @@
   "help.page.3.field_name_2": "La langue",
   "help.page.3.field_value_2": "Vous pouvez changer le langage du bot en utilisant:\n`{prefix}language [langue]`.\nUtilisez `en` pour anglais, et `fr` pour français.\nNotez que seuls les textes vont changer. Les commandes seront toujours les mêmes, peu importe le langage configuré.",
   "help.page.3.field_name_3": "Désactiver les commandes",
-  "help.page.3.field_value_3": "Vous pouvez désactiver tous les 'modules' de commandes individuellement en utilisant la commande `{prefix}disable [commande]`. Vous pouvez les réactiver en utilisant `{prefix}enable [command]`. Par exemple, si vous utilisez `{prefix}disable chess`, il sera impossible de jouer aux échecs sur votre serveur. Notez que vous ne pouvez pas désactiver les sous-commandes d'un module sans désactiver tout le module. Par exemple, vous ne pouvez pas désactiver `{prefix}bank pay` sans désactiver toutes les commandes de banque.\n Sachez que vous ne pouvez pas désactiver les commandes `{prefix}help`, `{prefix}prefix`, `{prefix}language`, `{prefix}enable` et `{prefix}disable`.",
+  "help.page.3.field_value_3": "Vous pouvez désactiver tous les 'modules' de commandes individuellement en utilisant la commande `{prefix}disable [commande]`. Vous pouvez les réactiver en utilisant `{prefix}enable [command]`. Par exemple, si vous utilisez `{prefix}disable chess`, il sera impossible de jouer aux échecs sur votre serveur. Notez que vous ne pouvez pas désactiver les sous-commandes d'un module sans désactiver tout le module. Par exemple, vous ne pouvez pas désactiver `{prefix}bank pay` sans désactiver toutes les commandes de banque.\n Sachez que vous ne pouvez pas désactiver les commandes `{prefix}help`, `{prefix}prefix`, `{prefix}language`, `{prefix}enable` et `{prefix}disable`.\nVous pouvez utiliser `{prefix}disable list` pour avoir une liste des commandes désactivées.",
   "help.page.3.field_name_4": "Le rôle maître du bot",
   "help.page.3.field_value_4": "Par défaut, vous avez besoin de certaines permissions pour utiliser certaines commandes (par exemple vous avez besoin de la permission `gérer le serveur` pour utiliser les commandes de cette page), mais vous pouvez créer un rôle 'maître du bot'. Ce rôle permet aux membres qui l'ont de passer outre les vérifications de permissions (sauf pour les commandes de modération). La commande est `{prefix}master set @role`. Vous pouvez supprimer le rôle maître en utilisant `{prefix}master delete`.",
   "help.page.3.field_name_5": "La confirmation des commandes",

@@ -6,7 +6,7 @@ import src.modules.disable_commands as disable_commands
 import src.modules.game.tic_tac_toe as tic_tac_toe
 import src.modules.game.blackjack.blackjack as black_jack
 import src.modules.game.connect4.connect4 as connect4
-import src.modules.game.chess.game as chess
+import src.modules.game.chess.chess as chess
 
 import src.modules.levels as levels
 import src.modules.bank as bank

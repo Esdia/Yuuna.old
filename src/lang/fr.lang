@@ -86,6 +86,8 @@
   "game.blackjack.help.page.1.field_value_3": "Un message montre toutes les informations. Vos cartes vous sont envoyées en message privé. Vous devez juste cliquer sur le S (pour 'stand') ou sur le H (pour 'hit') pour choisir vos actions. Si vous perdez (si vous dépassez 21 points), le jeu considère que vous avez choisi 'stand' pour le reste de la partie.",
 
   "game.chess.name": "Échecs",
+  "game.chess.color.white": "Blanc",
+  "game.chess.color.black": "Noir",
   "game.chess.entry.footer": "Cliquez sur J pour rejoindre la partie d'échecs.",
   "game.chess.inactivity.cancel": "La partie d'échecs a été annulée pour inactivité.",
   "game.chess.inactivity.lost": "Le vainqueur est {member} car son adversaire n'a pas joué à temps.",

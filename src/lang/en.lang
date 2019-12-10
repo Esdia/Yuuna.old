@@ -86,6 +86,8 @@
   "game.blackjack.help.page.1.field_value_3": "An embed message will display every needed infos. Your cards will be sent to you in private. You just have to click on the S (for 'stand') or on the H (for 'hit') in reactions to choose your action. If you lose (go higher than 21), you will be considered as standing for the rest of the game.",
 
   "game.chess.name": "Chess",
+  "game.chess.color.white": "White",
+  "game.chess.color.black": "Black",
   "game.chess.entry.footer": "Press J to join the game of chess.",
   "game.chess.inactivity.cancel": "The game of chess has been canceled due to inactivity.",
   "game.chess.inactivity.lost": "The winner is {member}, since their opponent did not play in time.",

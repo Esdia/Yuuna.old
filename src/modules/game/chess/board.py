@@ -1,210 +1,195 @@
-from src.modules.game.chess.pieces import Pieces
 import copy
 
-"""
-    This module manages the board
-    every board-related function is in there
-"""
+from src.modules.game.chess.pieces import *
 
 
 class Board:
-    def __init__(self, players, message):
-        self.board = self.create_board()
-        self.players = players
-        self.message = message
+    def __init__(self):
+        self.board = [
+            [Rook(0, 0, "B"), Knight(0, 1, "B"), Bishop(0, 2, "B"), Queen(0, 3, "B"), King(0, 4, "B"), Bishop(0, 5, "B"), Knight(0, 6, "B"), Rook(0, 7, "B")],
+            [Pawn(1, i, "B") for i in range(8)],
+            [None] * 8,
+            [None] * 8,
+            [None] * 8,
+            [None] * 8,
+            [Pawn(6, i, "W") for i in range(8)],
+            [Rook(7, 0, "W"), Knight(7, 1, "W"), Bishop(7, 2, "W"), Queen(7, 3, "W"), King(7, 4, "W"), Bishop(7, 5, "W"), Knight(7, 6, "W"), Rook(7, 7, "W")]
+        ]
+        self.last_move = None
+        self.tmp_board = None
 
     @staticmethod
-    def create_board():
-        # Seen from the white side, a back line in chess initially looks like that
-        pieces = [
-            (Pieces.Rook, 0),
-            (Pieces.Knight, 1),
-            (Pieces.Bishop, 2),
-            (Pieces.Queen, 3),
-            (Pieces.King, 4),
-            (Pieces.Bishop, 5),
-            (Pieces.Knight, 6),
-            (Pieces.Rook, 7)
-        ]
+    def in_bounds(x, y):
+        return 0 <= x <= 7 and 0 <= y <= 7
 
-        black_back = [
-            P("BLACK", 0, i) for (P, i) in pieces
-        ]
-        black_pawns = [
-            Pieces.Pawn("BLACK", 1, i) for i in range(8)
-        ]
+    def in_conflict(self, x, y, color):
+        return self.board[x][y] is not None and self.board[x][y].color == color
 
-        empty_line = [
-            ".." for _ in range(8)
-        ]
+    def delete(self, x, y):
+        self.board[x][y] = None
 
-        white_pawns = [
-            Pieces.Pawn("WHITE", 6, i) for i in range(8)
-        ]
-        white_back = [
-            P("WHITE", 7, i) for (P, i) in pieces
-        ]
+    def empty(self, x, y):
+        return self.board[x][y] is None
 
-        board = [
-            black_back,
-            black_pawns,
-            empty_line.copy(),
-            empty_line.copy(),
-            empty_line.copy(),
-            empty_line.copy(),
-            white_pawns,
-            white_back
-        ]
-        return board
+    def move(self, x_start, y_start, x_end, y_end, promotion=None, test=False):
+        piece = self.board[x_start][y_start]
 
-    # This functions returns the piece that represent the King of the specified color
+        if promotion is not None:
+            promotion_pieces = {
+                "R": Rook,
+                "N": Knight,
+                "B": Bishop,
+                "Q": Queen
+            }
+            piece = promotion_pieces[promotion](
+                x_end,
+                y_end,
+                piece.color
+            )
+
+        self.board[x_end][y_end] = piece
+        self.delete(x_start, y_start)
+
+        if not test:
+            self.last_move = {
+                "x": x_end,
+                "y": y_end,
+                "type": type(piece),
+                "moved_two_cases": type(piece) is Pawn and abs(x_end - x_start) == 2
+            }
+
+    # Used by the pawn to determine if it can move diagonally
+    def can_eat(self, x, y, color):
+        return self.in_bounds(x, y) and self.board[x][y] is not None and self.board[x][y] != color
+
+    # Determines if a pawn can do "en passant", and returns the move that would cause an "en passant"
+    def en_passant(self, x, y):
+        piece = self.board[x][y]
+        if type(piece) is not Pawn or self.last_move is None:
+            return None
+
+        direction = -1 if piece.color == "W" else 1
+        if self.last_move["type"] is Pawn and self.last_move["x"] == x and self.last_move["moved_two_cases"]:
+            if self.last_move["y"] == y - 1:
+                return x + direction, y - 1
+            elif self.last_move["y"] == y + 1:
+                return x + direction, y + 1
+        return None
+
     def get_king(self, color):
-        board = self.board
-        for line in board:
+        for line in self.board:
             for piece in line:
-                if type(piece) is Pieces.King and piece.color == color:
+                if type(piece) is King and piece.color == color:
                     return piece
         return None
 
-    # color = target to check : check if piece is targeted by the other color
-    # when x, y none, we check if the king of said color is in check, otherwise we check the case at the coordinates x,y
-    # i.e. if x is None, so is y.
-    # warning : x : vertical axis, y: horizontal axis
-    def in_check(self, color, x=None, y=None, board=None):
-        board = self.board if board is None else board
-        if x is None:
-            king = self.get_king(color)
-            x = king.x
-            y = king.y
-
-        for line in board:
+    # Determines if the piece on the case x y is on check by a piece of the color opposed of color
+    def on_check(self, x, y, color):
+        for line in self.board:
             for piece in line:
-                # We successively check if : there is a piece there, the piece is of the opposite color, and the piece can target our piece
-                if type(piece) is not str and piece.color != color and (x, y) in piece.available_moves(board):
+                if piece is not None and piece.color != color and (x, y) in piece.legal_moves(self):
                     return True
-
         return False
 
-    # If a player move a piece, would they put themselves in check ?
-    def would_be_in_check_if_moved(self, piece):
-        color = piece.color
+    def king_on_check(self, color):
         king = self.get_king(color)
-        x = king.x
-        y = king.y
+        return self.on_check(king.x, king.y, color)
 
+    # Check if the player is putting themselves in check by moving a piece
+    def self_check_by_uncover(self, moving_piece):
+        king = self.get_king(moving_piece.color)
         for line in self.board:
-            # I usually use "piece" there, but I use attacking_piece because piece is already a parameter of this function
             for attacking_piece in line:
-                if type(attacking_piece) is not str and attacking_piece.color != piece.color:
-                    if type(attacking_piece) in [Pieces.Rook, Pieces.Bishop, Pieces.Queen]:
-                        # Rook, Bishop and Queen are the only pieces that can be blocked by another one.
-                        # By saying "ignore that piece", we will get the available moves the attacking piece would have if the moving piece was not there
-                        if (x, y) in attacking_piece.available_moves(self.board, ignore=piece):
+                if attacking_piece is not None and attacking_piece.color != moving_piece.color:
+                    if type(attacking_piece) in [Rook, Bishop, Queen]:
+                        if (king.x, king.y) in attacking_piece.legal_moves(self, ignore=moving_piece):
                             return True
                     else:
-                        # The other pieces cannot be blocked, so we have no need to tell them to ignore our piece
-                        if (x, y) in attacking_piece.available_moves(self.board):
+                        if (king.x, king.y) in attacking_piece.legal_moves(self):
                             return True
         return False
 
-    # returns True if the player of the given color has a legal move (i.e. a move that would not put the player in check)
+    def in_check_after_play(self, piece, x_end, y_end):
+        self.tmp_board = self.board  # We save the board
+        self.board = copy.deepcopy(self.tmp_board)
+
+        tmp_piece = self.board[piece.x][piece.y]
+
+        tmp_piece.move(self, x_end, y_end, test=True)
+
+        in_check = self.king_on_check(piece.color)
+        self.board = self.tmp_board
+        return in_check
+
     def has_legal_moves(self, color):
         for line in self.board:
             for piece in line:
-                if type(piece) is not str and piece.color == color:
-                    moves = piece.available_moves(self.board)
-                    if len(moves) > 0 and not self.would_be_in_check_if_moved(piece):
-                        return True
+                if piece is not None and piece.color == color:
+                    moves = piece.legal_moves(self)
+                    for(x, y) in moves:
+                        if not self.in_check_after_play(piece, x, y):
+                            return True
         return False
 
-    # In chess, it is said that there is a lack of material if there are only kings on the board
-    # In this case, a draw is declared
+    # big_castle = True -> queen side castle
+    def can_castle(self, color, big_castle):
+        (x_king, y_king) = (0 if color == "B" else 7, 4)
+        (x_rook, y_rook) = (x_king, 0 if big_castle else 7)
+
+        king = self.board[x_king][y_king]
+        rook = self.board[x_rook][y_rook]
+
+        if type(king) is not King or king.has_moved:
+            return 1
+
+        if type(rook) is not Rook or rook.has_moved:
+            return 2
+
+        if any(not self.empty(x_king, y) for y in range(min(y_king, y_rook) + 1, max(y_king, y_rook))):
+            return 3
+
+        # Queen side castle
+        if y_king > y_rook:
+            if any(self.on_check(x_king, y_king - i, color) for i in range(3)):
+                return 4
+        else:
+            if any(self.on_check(x_king, y_king + i, color) for i in range(3)):
+                return 4
+
+        return 0
+
+    def castle(self, color, big_castle):
+        (x_king, y_king) = (0 if color == "B" else 7, 4)
+        (x_rook, y_rook) = (x_king, 0 if big_castle else 7)
+
+        # can_castle returns 0 if it can, anything else is an error code
+        if self.can_castle(color, big_castle) == 0:
+            if big_castle:
+                self.board[x_rook][y_rook].move(self, x_king, y_king - 1)
+                self.board[x_king][y_king].move(self, x_king, y_king - 2)
+            else:
+                self.board[x_rook][y_rook].move(self, x_king, y_king + 1)
+                self.board[x_king][y_king].move(self, x_king, y_king + 2)
+
+    def checkmate(self, color):
+        return self.king_on_check(color) and not self.has_legal_moves(color)
+
     def lack_of_material(self):
         for line in self.board:
             for piece in line:
-                if type(piece) not in [Pieces.King, str]:
+                if piece is not None and type(piece) is not King:
                     return False
         return True
 
-    # Return True if the king would still be in check after a play:
-    # it was in check before
-    def in_check_after_play(self, color, x_start, y_start, x_end, y_end):
-        board = []
-        for line in self.board:
-            board.append(copy.deepcopy(line))
-
-        self.play_move(x_start, y_start, x_end, y_end, board=board)
-        return self.in_check(color, board)
-
-    # Returns the status of the game
-    # A checkmate is when the player is in check, and they have no legal moves
-    # A stalemate is when the player is not in check, and they have no legal moves (it is considered as a draw)
-    # When there is a lack of material, the game is a draw
-    # If we have none of the situations above, the game can freely continue
     def status(self):
-        colors = [
-            "WHITE",
-            "BLACK"
-        ]
+        colors = ["W", "B"]
         for color in colors:
             if not self.has_legal_moves(color):
-                if self.in_check(color):
+                if self.king_on_check(color):
+                    # This color lost
                     return color
                 else:
                     return "STALEMATE"
         if self.lack_of_material():
             return "DRAW"
-        return "NONE"
-
-    # Given the coordinates of a piece, and the coordinates where the piece want to go, this function apply the move
-    def play_move(self, x_start, y_start, x_end, y_end, promotion=None, board=None):
-        board = self.board if board is None else board
-        piece = board[x_start][y_start]
-
-        if promotion is not None:
-            promotion_pieces = {
-                "R": Pieces.Rook,
-                "N": Pieces.Knight,
-                "B": Pieces.Bishop,
-                "Q": Pieces.Queen
-            }
-            piece = promotion_pieces[promotion](
-                piece.color,
-                x_start,
-                y_start
-            )
-
-        # These three pieces have different behaviors if they have not moved :
-        # The pawn is allowed to move to cases in one turn
-        # The king and the rook are allowed to castle
-        if type(piece) in [Pieces.King, Pieces.Rook, Pieces.Pawn]:
-            piece.has_moved = True
-
-        board[x_start][y_start] = ".."
-        board[x_end][y_end] = piece
-
-        piece.x = x_end
-        piece.y = y_end
-
-    # This function returns a printable reading-friendly character string representing the board
-    def get_printable(self):
-        printable = ""
-        print_board = []
-        for x in range(len(self.board)):
-            line = []
-            for y in range(len(self.board[x])):
-                piece = self.board[x][y]
-                if type(piece) is not str:
-                    line.append(piece.name)
-                else:
-                    line.append(piece)
-            print_board.append(line)
-
-        for line in print_board:
-            printable += "{}\n".format(
-                " | ".join(
-                    line
-                )
-            )
-
-        return printable
+        return None

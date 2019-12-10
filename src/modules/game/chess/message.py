@@ -1,9 +1,3 @@
-"""
-    This module manages the board message
-"""
-
-
-# Return a user-friendly board, consisting of emotes
 def get_printable(game):
     basic_board = [
         ["⬜", "⬛", "⬜", "⬛", "⬜", "⬛", "⬜", "⬛"],
@@ -42,8 +36,8 @@ def get_printable(game):
     printable = ""
     for x in range(8):
         for y in range(8):
-            piece = game.board[x][y]
-            if type(piece) is str:
+            piece = game.board.board[x][y]
+            if piece is None:
                 printable += basic_board[x][y]
             else:
                 printable += piece.emote
@@ -52,16 +46,12 @@ def get_printable(game):
     return printable
 
 
-# This function updates the message every turn
-async def update_message(infos, game):
-    await infos.client.delete_message(
-        game.message
-    )
+async def update_message(infos, game_infos):
+    await infos.client.delete_message(game_infos.message)
 
     message = await infos.client.send_message(
         infos.message.channel,
-        get_printable(game)
+        get_printable(game_infos)
     )
 
-    game.message = message
-
+    game_infos.message = message

@@ -5,6 +5,11 @@
   "language.en": "english",
   "language.fr": "french",
 
+  "anime.select": "Please select an anime",
+  "anime.results": "Results",
+  "anime.no_result": "There is no result for this search",
+  "anime.top10": "{user}'s favorites in the category '{type}'",
+
   "autorole.autorole": "Automatic role",
   "autorole.not_set": "There seems to be no autorole set.",
   "autorole.deleted": "It seems that the autorole has been deleted from the server.",
@@ -180,9 +185,9 @@
   "help.page.1.title": "Help - Yuuna",
   "help.page.1.description": "To test the latency of the bot, please type `{prefix}ping`\n[] are not to be used in the actual command, they mean that a variable is supposed to be used there.\nAs explained on page 2, you can change the prefix, but you can always use `y!help`, with the default prefix, to see this page.",
   "help.page.1.field_name_1": "How it works",
-  "help.page.1.field_value_1": "Each help page refer to a type of command, please click on the arrows in the reactions to navigate from a page to another.\nYou can use `y!help [module]` to start on the page of the module instead of the first page.\nModule names :\nPage 2: `misc`\nPage 3: `config`\nPage 4: `xp`\nPage 5: `bank`\nPage 6: `games`\nPage 7: `moderation`\nPage 8: `about`",
+  "help.page.1.field_value_1": "Each help page refer to a type of command, please click on the arrows in the reactions to navigate from a page to another.\nYou can use `y!help [module]` to start on the page of the module instead of the first page.\nModule names :\nPage 2: `misc`\nPage 3: `config`\nPage 4: `xp`\nPage 5: `bank`\nPage 6: `games`\nPage 7 : `mal`\nPage 8: `moderation`\nPage 9: `about`",
   "help.page.1.field_name_2": "Summary",
-  "help.page.1.field_value_2": "1. This page.\n2. The miscellaneous commands.\n3. The bot configuration.\n4. The levelling system.\n5. The bot configuration.\n6. The games.\n7. The moderation commands.\n8. Infos about the bot and the developer.",
+  "help.page.1.field_value_2": "1. This page.\n2. The miscellaneous commands.\n3. The bot configuration.\n4. The levelling system.\n5. The bot configuration.\n6. The games.\n7. MyAnimeList integration.\n8. The moderation commands.\n9. Infos about the bot and the developer.",
 
   "help.page.2.title": "Help - Yuuna : The miscellaneous commands",
   "help.page.2.description": "These commandes are off-category.",
@@ -190,7 +195,6 @@
   "help.page.2.field_value_1": "These commands have already been explained in the first page, please refer to it.",
   "help.page.2.field_name_2": "The newcomer's autorole",
   "help.page.2.field_value_2": "You can set one role to be automatically given to anyone joining your server buy using `{prefix}autorole set @role`.\nYou can see which role is the autorole by using `{prefix}autorole`.\nYou can remove the autorole (and disable this feature) by using `{prefix}autorole delete`.",
-
 
   "help.page.3.title": "Help - Yuuna : The bot configuration",
   "help.page.3.description": "You need the `manage server` permission to use any of the following commands. Every feature that can be configured (either in this module or in other modules) can be configured from the website : https://yuuna-website.herokuapp.com",
@@ -204,7 +208,6 @@
   "help.page.3.field_value_4": "By default, only those with the needed permissions can use a command (for example, you need the 'manage server' to use any command on this page), but you can set a role to be the 'bot master', it means that any person with this role can bypass the permission checking (except for the moderation commands). The command is `{prefix}master set @role`. You can delete the bot master by using `{prefix}master delete`",
   "help.page.3.field_name_5": "Command's confirmation",
   "help.page.3.field_value_5": "When you use some potentially dangerous commands (for example {prefix}ban), Yuuna will ask a confirmation to make sure you are not making a mistake. You can disable this feature by using `{prefix}confirm 0`, and you can enable it by using `{prefix}confirm 1`",
-
 
   "help.page.4.title": "Help - Yuuna : The levelling system",
   "help.page.4.description": "This bot features a levelling system. When you send a message that is not a Yuuna command, you'll earn a random amount of xp between 10 and 20. To limit the spam, you can only earn points once every minute. When you reach a certain amount of XP, you will level up, and earn some coins. To see how to use these coins, please refer to the next page.",
@@ -224,7 +227,6 @@
   "help.page.5.field_name_2": "The commands",
   "help.page.5.field_value_2": "You can use `{prefix}bank` to see how many coins you possess.\nYou can also mention other members to get their information : `{prefix}bank @member`, or use `{prefix}bank pay [n] @members` to give n coins to the mentioned members.\nYou can use `{prefix}banktop` to get a leaderboard of the richest people on the server.\nTo buy a role in the shop, please use `{prefix}shop` to display the shop, and click on the reaction corresponding to the role you want to buy.",
 
-
   "help.page.6.title": "Help - Yuuna : The games",
   "help.page.6.description": "You can play some games using Yuuna :D\nFor each game, you can use `{prefix}help [game_name]` to see the rules.",
   "help.page.6.field_name_1": "Tic-tac-toe",
@@ -236,25 +238,32 @@
   "help.page.6.field_name_4": "Chess",
   "help.page.6.field_value_4": "Use `{prefix}chess` to create a chess game.\nIf no player joins 2 minutes after the first player created the game, the game will be canceled.\nWhen it's your turn, please send in the chat your play, following the format described in the chess' help command.\nYou can forfeit by sending 'stop' in the game's channel.\nThe game will stop after 5 minutes of inactivity. Since inactivity for a few minutes is normal (since you need to think), you'll be warned 1 minute before the timeout.",
 
-  "help.page.7.title": "Help - Yuuna : The moderation commands",
-  "help.page.7.description": "These commands are used for the moderation. Depending on the command, the needed permission change. If you need a permission to use these commands, the bot need them too.",
-  "help.page.7.field_name_1": "Purge",
-  "help.page.7.field_value_1": "You need the `manage message` permission to use this command.\nYou can use `{prefix}purge [n]` in a channel to delete the last n messages (not counting the commands's message) in the channel.",
-  "help.page.7.field_name_2": "Mute",
-  "help.page.7.field_value_2": "You need the `manage message` permission to use this command. The bot needs the `manage channel` permission.\nYou can mute one or several members by using `{prefix}mute @members`. In the same way, you can unmute members by using `{prefix}unmute @members`.",
-  "help.page.7.field_name_3": "Kick",
-  "help.page.7.field_value_3": "You need the `kick member` permission to use this command.\nYou can kick members by using `{prefix}kick @members`.",
-  "help.page.7.field_name_4": "Ban",
-  "help.page.7.field_value_4": "You need the `ban member` permission to use this command.\nYou can ban members by using `{prefix}ban @members`.",
+  "help.page.7.title": "Help - Yuuna : MyAnimeList integration",
+  "help.page.7.description": "You can use Yuuna's MyAnimeList integration with the following commands. For all of the following commands, you can use `mal` as an allias for `myanimelist`",
+  "help.page.7.field_name_1": "Infos about an anime or a manga/novel",
+  "help.page.7.field_value_1": "You can look for infos about an anime by using the command `{prefix}myanimelist anime <title>`.\nIn the same way, you can look for infos about a manga or a novel by using the command `{prefix}myanimelist manga <title>`.",
+  "help.page.7.field_name_2": "Favorites",
+  "help.page.7.field_value_2": "You can display the favorites of a MyAnimeList user in one of the four categories : anime, manga, characters and people by using the command `{prefix}myanimelist favorites <category> <MAL username>`",
 
-  "help.page.8.title": "Help - Yuuna : About",
-  "help.page.8.description": "",
-  "help.page.8.field_name_1": "About the bot",
-  "help.page.8.field_value_1": "Yuuna is a multipurpose discord bot coded in Python by Esdia using Rapptz's discord API python wrapper.\nIf you meet a bug or have a suggestion, please contact Esdia and give him all needed information with the contact infos given bellow.\nYuuna comes with a website : https://yuuna-website.herokuapp.com/ , where you can find more detailed explanations about Yuuna's features, and where you can configure the bot.",
-  "help.page.8.field_name_2": "The developer's contact infos",
-  "help.page.8.field_value_2": "Discord : Esdia#0313\nGithub : https://github.com/Esdia",
-  "help.page.8.field_name_3": "Yuuna's source code",
-  "help.page.8.field_value_3": "Yuuna's code is fully open source, feel free to check the code on github : https://github.com/Esdia/Yuuna\nSource code of the website : https://github.com/Esdia/YuunaWebsite",
+  "help.page.8.title": "Help - Yuuna : The moderation commands",
+  "help.page.8.description": "These commands are used for the moderation. Depending on the command, the needed permission change. If you need a permission to use these commands, the bot need them too.",
+  "help.page.8.field_name_1": "Purge",
+  "help.page.8.field_value_1": "You need the `manage message` permission to use this command.\nYou can use `{prefix}purge [n]` in a channel to delete the last n messages (not counting the commands's message) in the channel.",
+  "help.page.8.field_name_2": "Mute",
+  "help.page.8.field_value_2": "You need the `manage message` permission to use this command. The bot needs the `manage channel` permission.\nYou can mute one or several members by using `{prefix}mute @members`. In the same way, you can unmute members by using `{prefix}unmute @members`.",
+  "help.page.8.field_name_3": "Kick",
+  "help.page.8.field_value_3": "You need the `kick member` permission to use this command.\nYou can kick members by using `{prefix}kick @members`.",
+  "help.page.8.field_name_4": "Ban",
+  "help.page.8.field_value_4": "You need the `ban member` permission to use this command.\nYou can ban members by using `{prefix}ban @members`.",
+
+  "help.page.9.title": "Help - Yuuna : About",
+  "help.page.9.description": "",
+  "help.page.9.field_name_1": "About the bot",
+  "help.page.9.field_value_1": "Yuuna is a multipurpose discord bot coded in Python by Esdia using Rapptz's discord API python wrapper.\nIf you meet a bug or have a suggestion, please contact Esdia and give him all needed information with the contact infos given bellow.\nYuuna comes with a website : https://yuuna-website.herokuapp.com/ , where you can find more detailed explanations about Yuuna's features, and where you can configure the bot.",
+  "help.page.9.field_name_2": "The developer's contact infos",
+  "help.page.9.field_value_2": "Discord : Esdia#0313\nGithub : https://github.com/Esdia",
+  "help.page.9.field_name_3": "Yuuna's source code",
+  "help.page.9.field_value_3": "Yuuna's code is fully open source, feel free to check the code on github : https://github.com/Esdia/Yuuna\nSource code of the website : https://github.com/Esdia/YuunaWebsite",
 
   "ignore_confirm.disable": "I will ask for a confirmation when you use some commands.",
   "ignore_confirm.enable": "I will no longer ask for a confirmation when you use a command.",

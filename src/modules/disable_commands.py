@@ -46,9 +46,15 @@ aliases_tic_tac_toe = [
     "morpion"
 ]
 
+aliases_mal = [
+    "myanimelist",
+    "mal"
+]
+
 aliases = [
     aliases_blackjack,
-    aliases_tic_tac_toe
+    aliases_tic_tac_toe,
+    aliases_mal
 ]
 
 

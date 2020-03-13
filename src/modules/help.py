@@ -43,11 +43,14 @@ async def interpret(infos):
                 "games": 5,
                 "jeux": 5,  # French for games
 
-                "mod": 6,
-                "moderation": 6,
+                "myanimelist": 6,
+                "mal": 6,
 
-                "about": 7,
-                "contact": 7
+                "mod": 7,
+                "moderation": 7,
+
+                "about": 8,
+                "contact": 8
             }
 
             if msg[1].lower() in modules_dict:

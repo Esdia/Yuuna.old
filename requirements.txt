@@ -1,3 +1,4 @@
+jikanpy
 discord
 discord.py
 aioredis

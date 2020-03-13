@@ -1,9 +1,10 @@
 import discord
 import logging
+from jikanpy import AioJikan
 
 import os
 import sys
-from asyncio import sleep
+from asyncio import sleep, get_event_loop
 
 import src.utils.information as information
 from src.utils.storage import Database
@@ -15,6 +16,7 @@ from src.modules.levels import give_xp
 client = discord.Client()
 is_heroku = os.environ.get('IS_HEROKU', False)
 database = None
+jikan = None
 logger = None
 
 
@@ -41,8 +43,10 @@ async def refresh_redis():
 
 @client.event
 async def on_ready():
-    global database
+    global database, jikan
     await client.change_presence(game=discord.Game(name="y!help"))
+
+    jikan = AioJikan(loop=get_event_loop())
 
     client.loop.create_task(
         refresh_redis()
@@ -75,6 +79,7 @@ async def on_message(message):
             client,
             message,
             database,
+            jikan,
             is_heroku
         )
         # if True, then the message was a command

@@ -3,10 +3,11 @@ import asyncio
 
 
 class Infos:
-    def __init__(self, client, message, database):
+    def __init__(self, client, message, database, jikan):
         self.client = client
         self.message = message
         self.database = database
+        self.jikan = jikan
         # Sometimes the bot tries to delete reactions. In order to do that, the bot need the manage_message permission
         # We will use this variable to see if the bot can do what it si trying to do
         self.manage_messages = message.server.me.server_permissions.manage_messages
@@ -43,11 +44,12 @@ class Infos:
         return language_data
 
 
-async def init(client, message, database, is_heroku):
+async def init(client, message, database, jikan, is_heroku):
     infos = Infos(
         client,
         message,
-        database
+        database,
+        jikan
     )
     infos.storage = await infos.get_storage()
     infos.prefix = await infos.get_prefix()
@@ -74,6 +76,9 @@ async def push_commands(database):
         "ttt",
         "morpion",
         "connect4",
+
+        "myanimelist",
+        "mal",
 
         "purge",
         "mute",

@@ -11,6 +11,7 @@ import src.modules.game.chess.chess as chess
 import src.modules.levels as levels
 import src.modules.bank as bank
 import src.modules.shop as shop
+import src.modules.anime as anime
 
 import src.modules.autorole as autorole
 
@@ -57,6 +58,9 @@ async def interpret(infos):
         "ttt": tic_tac_toe.entry,
         "morpion": tic_tac_toe.entry,
         "connect4": connect4.start,
+
+        "myanimelist": anime.interpret,
+        "mal": anime.interpret,
 
         "purge": moderation.purge,
         "mute": moderation.mute,

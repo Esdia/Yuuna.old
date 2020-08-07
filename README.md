@@ -1,6 +1,6 @@
 # Yuuna
 
-## DEPRECATED : This is a old (but working) version. The development has been stopped, please see the [current version](https://github.com/Esdia/Yuuna/tree/master)
+## DEPRECATED : This is an old version written before the discord.py rewrite. The development has been stopped, please see the [current version](https://github.com/Esdia/Yuuna/tree/master)
 
 Yuuna is a polyvalent discord bot coded in Python by Esdia using Rapptz's discord API Wrapper.\
 I took some inspiration from [cookkkie's Mee6](https://github.com/cookkkie/mee6), all credits to him regarding the way I manage my storage system.
